@@ -1,10 +1,10 @@
 import ProductItem from "@/components/ProductItem";
-import products from "@/utils/data";
+import data from "@/utils/data";
 
 export default function Home() {
 	return (
 		<>
-			{products.map((product) => (
+			{data.products.map((product) => (
 				<ProductItem product={product} key={product.id} />
 			))}
 		</>
