@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Store } from "@/utils/Store";
 
 const Header = () => {
-	const { state, dispatch } = useContext(Store);
+	const { state } = useContext(Store);
 	const { cart } = state;
 	return (
 		<header>
