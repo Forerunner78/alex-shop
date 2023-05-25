@@ -1,7 +1,8 @@
 import { Store } from "@/utils/Store";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 
 const CartScreen = () => {
@@ -91,4 +92,4 @@ const CartScreen = () => {
 	);
 };
 
-export default CartScreen;
+export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
