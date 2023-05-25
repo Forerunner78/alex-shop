@@ -64,7 +64,7 @@ const CartScreen = () => {
 								</div>
 							</li>
 							<li>
-								<button onClick={router.push("/shipping")}>Check Out</button>
+								<button onClick={() => router.push("/shipping")}>Check Out</button>
 							</li>
 						</ul>
 					</div>
