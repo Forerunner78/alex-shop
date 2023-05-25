@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AddToCartButton from "./AddToCartButton";
 
 const ProductItem = ({ product }) => {
 	return (
@@ -13,7 +14,7 @@ const ProductItem = ({ product }) => {
 				</Link>
 				<div value={product.rating} text={`${product.numReviews} reviews`} />
 				<h3>{`${product.price} €`}</h3>
-				<button type="button">Add To Cart</button>
+				<AddToCartButton product={product} />
 			</div>
 		</>
 	);
