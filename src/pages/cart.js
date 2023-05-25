@@ -15,6 +15,11 @@ const CartScreen = () => {
 		dispatch({ type: "CART_REMOVE_ITEM", payload: item });
 	};
 
+	const updateCartHandler = (item, qty) => {
+		const quantity = Number(qty);
+		dispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
+	};
+
 	return (
 		<>
 			<h1>Shopping Cart</h1>
@@ -45,6 +50,18 @@ const CartScreen = () => {
 												height={50}
 											></Image>
 										</Link>
+									</td>
+									<td>
+										<select
+											value={item.quantity}
+											onChange={(e) =>
+												updateCartHandler(item, e.target.value)
+											}
+										>
+											{[...Array(item.countInStock).keys()].map((x) => (
+												<option key={x + 1} value={x + 1}></option>
+											))}
+										</select>
 									</td>
 									<td>{item.quantity}</td>
 									<td>{item.price} €</td>
