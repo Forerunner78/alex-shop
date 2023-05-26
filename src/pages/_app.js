@@ -2,9 +2,10 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Layout from "@/components/Layout";
 import { StoreProvider } from "@/utils/Store";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import { Roboto } from "next/font/google";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,7 +26,15 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 						<ToastContainer limit={1} />
 						<Header />
 						<Layout>
-							<Component {...pageProps} />
+							{Component.auth ? (
+								<Auth>
+									<Component {...pageProps} />
+								</Auth>
+							) : (
+								<>
+									<Component {...pageProps} />
+								</>
+							)}
 						</Layout>
 
 						<Footer />
@@ -34,4 +43,18 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 			</main>
 		</>
 	);
+}
+
+function Auth({ children }) {
+	const router = useRouter();
+	const { status } = useSession({
+		required: true,
+		onUnauthenticated() {
+			router.push("/unauthorized?message=Login required");
+		},
+	});
+	if (status === "loading") {
+		return <div>Loading...</div>;
+	}
+	return children;
 }
