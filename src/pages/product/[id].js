@@ -1,13 +1,12 @@
 import AddToCartButton from "@/components/AddToCartButton";
-import data from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import db from "@/utils/db";
+import Product from "@/models/productModel";
 
-const ProductScreen = () => {
-	const { query } = useRouter();
-	const { id } = query;
-	const product = data.products.find((x) => x.id == id);
+const ProductScreen = (props) => {
+	const { product } = props;
+
 	if (!product) {
 		return <div>Product not found!</div>;
 	}
@@ -51,3 +50,13 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
+
+export async function getServerSideProps(context) {
+	const { params } = context;
+	const { id } = params;
+
+	await db.connect();
+	const product = await Product.findOne({ id }).lean();
+	await db.disconnect();
+	return { props: { product: product ? db.convertDocToObj(product) : null } };
+}
