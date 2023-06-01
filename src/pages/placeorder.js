@@ -3,7 +3,6 @@ import { Store } from "@/utils/Store";
 import { getError } from "@/utils/error";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,8 +13,6 @@ const PlaceOrderScreen = () => {
 	const { state, dispatch } = useContext(Store);
 	const { cart } = state;
 	const { cartItems, shippingAddress, paymentMethod } = cart;
-	const session = useSession();
-	const user = session.data._id;
 
 	const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
 	const itemsPrice = round2(cartItems.reduce((a, c) => a + c.quantity * c.price, 0));
@@ -31,13 +28,6 @@ const PlaceOrderScreen = () => {
 		}
 	}, [paymentMethod, router]);
 
-	useEffect(() => {
-		if (!user) {
-			router.push("/login");
-			toast.info("You must be logged to place an order");
-		}
-	}, [user, router]);
-
 	const [loading, setLoading] = useState(false);
 
 	const placeOrderHandler = async () => {
@@ -52,7 +42,6 @@ const PlaceOrderScreen = () => {
 				shippingAddress,
 				taxPrice,
 				totalPrice,
-				user,
 			});
 			setLoading(false);
 			dispatch({ type: "CART_CLEAR_ITEMS" });

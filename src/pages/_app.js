@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Layout from "@/components/Layout";
 import { StoreProvider } from "@/utils/Store";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { SessionProvider, useSession } from "next-auth/react";
 import { Roboto } from "next/font/google";
 import Head from "next/head";
@@ -23,21 +24,22 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 				</Head>
 				<SessionProvider session={session}>
 					<StoreProvider>
-						<ToastContainer limit={1} />
-						<Header />
-						<Layout>
-							{Component.auth ? (
-								<Auth>
-									<Component {...pageProps} />
-								</Auth>
-							) : (
-								<>
-									<Component {...pageProps} />
-								</>
-							)}
-						</Layout>
-
-						<Footer />
+						<PayPalScriptProvider deferLoading={true}>
+							<ToastContainer limit={1} />
+							<Header />
+							<Layout>
+								{Component.auth ? (
+									<Auth>
+										<Component {...pageProps} />
+									</Auth>
+								) : (
+									<>
+										<Component {...pageProps} />
+									</>
+								)}
+							</Layout>
+							<Footer />
+						</PayPalScriptProvider>
 					</StoreProvider>
 				</SessionProvider>
 			</main>
