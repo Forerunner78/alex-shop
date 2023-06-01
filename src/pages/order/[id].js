@@ -132,7 +132,7 @@ const OrderScreen = () => {
 						<div>
 							<h2>Payment Method</h2>
 							<div>{paymentMethod}</div>
-							{isPaid ? <div>Paid on {paidAt}</div> : <div>Not paid</div>}
+							{isPaid ? <div>{paidAt}</div> : <div>Not paid</div>}
 						</div>
 						<div>
 							<h2>Order Items</h2>

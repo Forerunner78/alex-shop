@@ -23,7 +23,7 @@ const handler = async (req, res) => {
 			.getMinutes()
 			.toString()
 			.padStart(2, "0")}`;
-		const formattedDateTime = `${formattedDate} at ${formattedTime}`;
+		const formattedDateTime = `Paid on ${formattedDate} at ${formattedTime}`;
 		order.paidAt = formattedDateTime;
 		order.paymentResult = {
 			id: req.body.id,
