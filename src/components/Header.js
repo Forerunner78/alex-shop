@@ -8,6 +8,9 @@ import { signOut, useSession } from "next-auth/react";
 import { Menu } from "@headlessui/react";
 import DropDownLink from "./DropDownLink";
 import Cookies from "js-cookie";
+import { IoCartOutline } from "react-icons/io5";
+import { IoCartSharp } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
 	const { status, data: session } = useSession();
@@ -26,27 +29,45 @@ const Header = () => {
 	};
 
 	return (
-		<header>
-			<Layout>
+		<header className="p-5 mb-10 flex flex-row justify-between">
+			<section>
 				<Link href="/">
 					<Image
 						src={Logo}
 						alt="Logo of the website"
-						className="absolute rounded-circle"
+						className=" rounded-circle"
 						width={70}
 						height={70}
 						priority
 					/>
 				</Link>
+			</section>
+			<section className="flex items-center">
 				<span>
-					<h1>Alex&apos;s Shop</h1>
+					<h1 className="text-2xl uppercase">
+						<Link href="/" className="flex justify-center">
+							Alex&apos;s Shop
+						</Link>
+					</h1>
 				</span>
-				<div>
+			</section>
+			<section className="flex flex-row justify-between items-center text-2xl">
+				<div className="mx-2">
 					<Link href="/cart">
-						Cart {cartItemsCount > 0 && <span>{cartItemsCount}</span>}
+						<div className="relative ">
+							{cartItemsCount > 0 ? <IoCartSharp /> : <IoCartOutline />}
+							<div className=""></div>
+							<span className="absolute text-[12px] w-[20px] h-[20px] -top-[1rem] left-[1rem] bg-black rounded-full">
+								<span className="absolute -top-[0.4rem] left-[0.4rem] text-white">
+									{cartItemsCount}
+								</span>
+							</span>
+						</div>
 					</Link>
-
-					{status === "loading" ? (
+				</div>
+				<div className="mx-2">
+					<CgProfile />
+					{/* {status === "loading" ? (
 						"Loading"
 					) : session?.user ? (
 						<Menu as="div">
@@ -67,9 +88,9 @@ const Header = () => {
 						</Menu>
 					) : (
 						<Link href="/login">Login</Link>
-					)}
+					)} */}
 				</div>
-			</Layout>
+			</section>
 		</header>
 	);
 };

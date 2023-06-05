@@ -9,6 +9,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
+import "../../dist/output.css";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
