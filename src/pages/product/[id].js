@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import db from "@/utils/db";
 import Product from "@/models/productModel";
+import Rating from "@/components/Rating";
 
 const ProductScreen = (props) => {
 	const { product } = props;
@@ -11,8 +12,13 @@ const ProductScreen = (props) => {
 		return <div>Product not found!</div>;
 	}
 	return (
-		<>
-			<Link href="/">Back to Home</Link>
+		<div className="m-2">
+			<div>
+				<Link href="/" className="underline">
+					&lt; Back to Home
+				</Link>
+			</div>
+
 			<div>
 				<Image
 					src={product.image}
@@ -22,30 +28,24 @@ const ProductScreen = (props) => {
 					priority={true}
 				/>
 			</div>
-			<ul>
-				<li>
-					<h1>{product.name}</h1>
-				</li>
-				<li>Category: {product.category}</li>
-				<li>
-					{product.rating} of {product.numReviews} reviews{" "}
-				</li>
-				<li>Description {product.description}</li>
-			</ul>
 			<div>
+				<div className="mt-10 mb-10 uppercase font-bold text-center text-sm">
+					<h1 className="text-xl">{product.name}</h1>
+					<Rating value={product.rating} numReview={product.numReviews} />
+				</div>
+				<div className="font-bold text-center text-xl">{product.price} €</div>
+				<div className="text-justify mb-10">{product.shortDescription}</div>
+
 				<div>
-					<div>Price:</div>
-					<div>
-						<strong>{product && product.price} €</strong>
-					</div>
-					<div>
-						<div>Status:</div>
-						<div>{product.countInStock > 0 ? "In Stock" : "Unavailable"}</div>
-					</div>
-					<AddToCartButton product={product} />
+					<AddToCartButton
+						product={product}
+						className={
+							"w-full h-24 bg-black text-white text-2xl uppercase rounded-full"
+						}
+					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
