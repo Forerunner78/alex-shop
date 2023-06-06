@@ -6,7 +6,7 @@ const Footer = () => {
 	return (
 		<footer className="mt-10 px-5 flex flex-row justify-between text-center">
 			<div className="flex flex-col items-center justify-center">
-				<h1 className="uppercase text-xl">Alex&apos;s Shop</h1>
+				<h1 className="uppercase text-xl">Alex Shop</h1>
 				<span className="text-xs">Copyright &copy; {new Date().getFullYear()}</span>
 			</div>
 			<div className="flex flex-row flex-end items-center">
