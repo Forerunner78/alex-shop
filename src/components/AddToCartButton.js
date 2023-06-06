@@ -3,7 +3,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-const AddToCartButton = ({ product }) => {
+const AddToCartButton = ({ product, className }) => {
 	const { state, dispatch } = useContext(Store);
 
 	const addToCartHandler = async () => {
@@ -20,7 +20,7 @@ const AddToCartButton = ({ product }) => {
 	};
 
 	return (
-		<button className="m-5 p-1 bg-black text-white rounded-full" onClick={addToCartHandler}>
+		<button className={`${className}`} onClick={addToCartHandler}>
 			Add To Cart
 		</button>
 	);

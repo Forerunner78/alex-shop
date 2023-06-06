@@ -15,7 +15,10 @@ const ProductItem = ({ product }) => {
 				</Link>
 				<Rating value={product.rating} numReview={product.numReviews} />
 				<h3 className="underline">{`${product.price} €`}</h3>
-				<AddToCartButton product={product} />
+				<AddToCartButton
+					product={product}
+					className={"m-5 p-1 bg-black text-white rounded-full"}
+				/>
 			</div>
 		</div>
 	);
