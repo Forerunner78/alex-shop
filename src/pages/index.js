@@ -4,11 +4,11 @@ import db from "@/utils/db";
 
 export default function Home({ products }) {
 	return (
-		<>
+		<div className="grid gap-4 grid-cols-2">
 			{products.map((product) => (
 				<ProductItem product={product} key={product.id} />
 			))}
-		</>
+		</div>
 	);
 }
 

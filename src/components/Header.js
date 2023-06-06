@@ -43,8 +43,11 @@ const Header = () => {
 				</Link>
 			</section>
 			<section className="flex items-center">
-				<h1 className="text-center text-2xl uppercase">
-					<Link href="/">Alex&apos;s Shop</Link>
+				<h1 className="text-center text-3xl uppercase">
+					<Link href="/">
+						Alex
+						<br /> Shop
+					</Link>
 				</h1>
 			</section>
 			<section className="flex flex-row justify-between items-center text-2xl">

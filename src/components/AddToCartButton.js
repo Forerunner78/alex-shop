@@ -19,7 +19,11 @@ const AddToCartButton = ({ product }) => {
 		toast.success("Product added to the cart");
 	};
 
-	return <button onClick={addToCartHandler}>Add To Cart</button>;
+	return (
+		<button className="m-5 p-1 bg-black text-white rounded-full" onClick={addToCartHandler}>
+			Add To Cart
+		</button>
+	);
 };
 
 export default AddToCartButton;
