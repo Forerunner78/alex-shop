@@ -28,19 +28,21 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 					<StoreProvider>
 						<PayPalScriptProvider deferLoading={true}>
 							<ToastContainer limit={1} />
-							<Header />
-							<Layout>
-								{Component.auth ? (
-									<Auth>
-										<Component {...pageProps} />
-									</Auth>
-								) : (
-									<>
-										<Component {...pageProps} />
-									</>
-								)}
-							</Layout>
-							<Footer />
+							<main className="w-full min-h-screen">
+								<Header />
+								<main className="w-full min-h-screen">
+									{Component.auth ? (
+										<Auth>
+											<Component {...pageProps} />
+										</Auth>
+									) : (
+										<>
+											<Component {...pageProps} />
+										</>
+									)}
+								</main>
+								<Footer />
+							</main>
 						</PayPalScriptProvider>
 					</StoreProvider>
 				</SessionProvider>
