@@ -43,21 +43,31 @@ const ShippingScreen = () => {
 	return (
 		<>
 			<CheckoutWizard activeStep={1} />
-			<form onSubmit={handleSubmit(submitHandler)}>
-				<h1>Shipping Address</h1>
-				<div>
-					<label htmlFor="fullName">Name</label>
+			<h1 className="text-3xl font-bold text-center mb-10">Your Shipping Address</h1>
+			<form className="grid grid-cols-2" onSubmit={handleSubmit(submitHandler)}>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold" htmlFor="fullName">
+						Name :
+					</label>
 					<input
 						id="fullName"
+						className="rounded border-2"
+						placeholder="Full Name"
 						autoFocus
 						{...register("fullName", { required: "Please enter a full name" })}
 					/>
-					{errors.fullName && <div>{errors.fullName.message}</div>}
+					{errors.fullName && (
+						<div className="text-xs text-red-500">{errors.fullName.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="address">Address</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold" htmlFor="address">
+						Address :
+					</label>
 					<input
 						id="address"
+						className="rounded border-2"
+						placeholder="Address"
 						autoFocus
 						{...register("address", {
 							required: "Please enter an address",
@@ -67,43 +77,65 @@ const ShippingScreen = () => {
 							},
 						})}
 					/>
-					{errors.address && <div>{errors.address.message}</div>}
+					{errors.address && (
+						<div className="text-xs text-red-500">{errors.address.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="city">City</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold" htmlFor="city">
+						City :
+					</label>
 					<input
 						id="city"
+						className="rounded border-2"
+						placeholder="City"
 						autoFocus
 						{...register("city", {
 							required: "Please enter a city",
 						})}
 					/>
-					{errors.city && <div>{errors.city.message}</div>}
+					{errors.city && (
+						<div className="text-xs text-red-500">{errors.city.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="postalCode">Postal Code</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold" htmlFor="postalCode">
+						Postal Code :
+					</label>
 					<input
 						id="postalCode"
+						className="rounded border-2"
+						placeholder="Postal code"
 						autoFocus
 						{...register("postalCode", {
 							required: "Please enter a postal code",
 						})}
 					/>
-					{errors.postalCode && <div>{errors.postalCode.message}</div>}
+					{errors.postalCode && (
+						<div className="text-xs text-red-500">{errors.postalCode.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="country">Country</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold" htmlFor="country">
+						Country :
+					</label>
 					<input
 						id="country"
+						className="rounded border-2"
+						placeholder="Country"
 						autoFocus
 						{...register("country", {
 							required: "Please enter a country",
 						})}
 					/>
-					{errors.country && <div>{errors.country.message}</div>}
+					{errors.country && (
+						<div className="text-xs text-red-500">{errors.country.message}</div>
+					)}
 				</div>
-				<div>
-					<button>Next</button>
+				<div className="relative">
+					<button className="absolute -left-[50%] -bottom-[50%] w-full h-10 bg-black text-white text-xl uppercase rounded-full">
+						Next
+					</button>
 				</div>
 			</form>
 		</>
