@@ -14,7 +14,7 @@ const ProductItem = ({ product }) => {
 					<h1 className="uppercase font-bold">{product.name}</h1>
 				</Link>
 				<Rating value={product.rating} numReview={product.numReviews} />
-				<h3 className="underline">{`${product.price} €`}</h3>
+				<h3 className="underline m-2 font-bold">{`${product.price} €`}</h3>
 				<AddToCartButton
 					product={product}
 					className={"m-5 p-1 bg-black text-white rounded-full"}

@@ -13,10 +13,8 @@ const ProductScreen = (props) => {
 	}
 	return (
 		<div className="m-2">
-			<div>
-				<Link href="/" className="underline">
-					&lt; Back to Home
-				</Link>
+			<div className="mb-5 underline">
+				<Link href="/">&lt; Back to Home</Link>
 			</div>
 
 			<div>
@@ -29,18 +27,18 @@ const ProductScreen = (props) => {
 				/>
 			</div>
 			<div>
-				<div className="mt-10 mb-10 uppercase font-bold text-center text-sm">
+				<div className="my-10 uppercase font-bold text-center text-sm">
 					<h1 className="text-xl">{product.name}</h1>
 					<Rating value={product.rating} numReview={product.numReviews} />
 				</div>
-				<div className="font-bold text-center text-xl">{product.price} €</div>
-				<div className="text-justify mb-10">{product.shortDescription}</div>
+				<div className="font-bold text-center text-xl mb-5">{product.price} €</div>
+				<div className="text-justify indent-10 mb-10">{product.shortDescription}</div>
 
 				<div>
 					<AddToCartButton
 						product={product}
 						className={
-							"w-full h-24 bg-black text-white text-2xl uppercase rounded-full"
+							"w-full h-10 bg-black text-white text-2xl uppercase rounded-full"
 						}
 					/>
 				</div>

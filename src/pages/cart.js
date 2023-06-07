@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { toast } from "react-toastify";
+import { HiOutlineTrash } from "react-icons/hi2";
 
 const CartScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -30,68 +31,88 @@ const CartScreen = () => {
 	};
 
 	return (
-		<>
-			<h1>Shopping Cart</h1>
+		<div className="w-full min-h-screen">
+			<h1 className="text-3xl font-bold text-center mb-10">Your Shopping Cart</h1>
 			{cartItems.length === 0 ? (
 				<div>
 					Cart is empty. <Link href="/">Go shopping</Link>
 				</div>
 			) : (
-				<div>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Quantity</th>
-								<th>Price</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							{cartItems.map((item) => (
-								<tr key={item.id}>
-									<td>
-										<Link href={`/product/${item.id}`}>
-											<Image
-												src={item.image}
-												alt={item.name}
-												width={50}
-												height={50}
-											></Image>
-										</Link>
-									</td>
-									<td>
-										<select
-											value={item.quantity}
-											onChange={(e) =>
-												updateCartHandler(item, e.target.value)
-											}
-										>
-											{[...Array(item.countInStock).keys()].map((x) => (
-												<option key={x + 1} value={x + 1}>
-													{x + 1}
-												</option>
-											))}
-										</select>
-									</td>
-									<td>{item.quantity}</td>
-									<td>{item.price} €</td>
-									<td>
-										<button onClick={() => removeItemHandler(item)}>X</button>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-					<div>
-						<ul>
-							<li>
-								<div>
-									Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :{" "}
-									{cartItems.reduce((a, c) => a + c.quantity * c.price, 0)} €
-								</div>
+				<div className="flex flex-col">
+					<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+						<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
+							<div className="overflow-hidden">
+								<table className="min-w-full text-center text-sm font-light">
+									<thead className="border-b font-medium dark:border-neutral-500">
+										<tr>
+											<th scope="col" className="px-3 py-4">
+												Item
+											</th>
+											<th scope="col" className="px-3 py-4">
+												Quantity
+											</th>
+											<th scope="col" className="px-3 py-4">
+												Price
+											</th>
+											<th scope="col" className="px-3 py-4">
+												Action
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										{cartItems.map((item) => (
+											<tr
+												key={item._id}
+												className="border-b dark:border-neutral-500"
+											>
+												<td className="whitespace-nowrap px-3 py-4 font-medium">
+													<Link href={`/product/${item.id}`}>
+														<Image
+															src={item.image}
+															alt={item.name}
+															width={50}
+															height={50}
+														></Image>
+													</Link>
+												</td>
+												<td className="whitespace-nowrap px-3 py-4">
+													<select
+														value={item.quantity}
+														onChange={(e) =>
+															updateCartHandler(item, e.target.value)
+														}
+													>
+														{[...Array(item.countInStock).keys()].map(
+															(x) => (
+																<option key={x + 1} value={x + 1}>
+																	{x + 1}
+																</option>
+															)
+														)}
+													</select>
+												</td>
+												<td className="whitespace-nowrap px-3 py-4">
+													{item.price} €
+												</td>
+												<td className="whitespace-nowrap px-3 py-4">
+													<button onClick={() => removeItemHandler(item)}>
+														<HiOutlineTrash />
+													</button>
+												</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div className="flex justify-end me-5">
+						<ul className="flex flex-col text-lg font-bold">
+							<li className="my-5">
+								Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :{" "}
+								{cartItems.reduce((a, c) => a + c.quantity * c.price, 0)} €
 							</li>
-							<li>
+							<li className="grid justify-items-stretch h-10 mt-5 bg-black text-white rounded-full">
 								<button onClick={() => router.push("login?redirect=/shipping")}>
 									Check Out
 								</button>
@@ -100,7 +121,7 @@ const CartScreen = () => {
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 
