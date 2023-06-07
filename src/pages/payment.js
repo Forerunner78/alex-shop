@@ -32,25 +32,33 @@ const PaymentScreen = () => {
 	return (
 		<>
 			<CheckoutWizard activeStep={2} />
-			<form onSubmit={submitHandler}>
-				<h1>Payment Method</h1>
+			<h1 className="text-3xl font-bold text-center mb-10">Payment Method</h1>
+			<form className="px-4" onSubmit={submitHandler}>
 				{["Paypal", "Stripe", "CashOnDelivery"].map((payment) => (
-					<div key={payment}>
+					<div className="my-5" key={payment}>
 						<input
 							name="paymentMethod"
 							id={payment}
-							type="radio"
+							type="checkbox"
 							checked={selectedPaymentMethod === payment}
 							onChange={() => setSelectedPaymentMethod(payment)}
 						/>
-						<label htmlFor={payment}>{payment}</label>
+						<label className="ms-2 mb-2" htmlFor={payment}>
+							{payment}
+						</label>
 					</div>
 				))}
-				<div>
-					<button onClick={() => router.push("/shipping")} type="button">
-						Back
+				<div className="flex justify-around mt-10">
+					<button
+						className="uppercase text-white bg-black rounded-full min-w-25 h-10 px-5"
+						onClick={() => router.push("/shipping")}
+						type="button"
+					>
+						&lt; Back
 					</button>
-					<button>Next</button>
+					<button className="uppercase text-white bg-black rounded-full min-w-25 h-10 px-5">
+						Next &gt;
+					</button>
 				</div>
 			</form>
 		</>
