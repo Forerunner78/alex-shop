@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { EmptyCart } from "@/components/EmptyCart";
 
 const PlaceOrderScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -59,9 +60,7 @@ const PlaceOrderScreen = () => {
 			<CheckoutWizard activeStep={3} />
 			<h1 className="text-3xl font-bold text-center mb-10">Your Order</h1>
 			{cartItems.length === 0 ? (
-				<div>
-					Cart is empty. <Link href="/">Go to Home</Link>
-				</div>
+				<EmptyCart />
 			) : (
 				<div>
 					<div className="px-4">
