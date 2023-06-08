@@ -10,6 +10,9 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { EmptyCart } from "@/components/EmptyCart";
+import ShippingAddress from "@/components/ShippingAddress";
+import PaymentMethod from "@/components/PaymentMethod";
+import OrderSummary from "@/components/OrderSummary";
 
 const PlaceOrderScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -64,15 +67,8 @@ const PlaceOrderScreen = () => {
 			) : (
 				<div>
 					<div className="px-4">
-						<div className="border-2 my-5">
-							<h2 className="text-lg font-bold uppercase mb-2">Shipping Address</h2>
-							<ul>
-								<li>{shippingAddress.fullName}</li>
-								<li>{shippingAddress.address}</li>
-								<li>{shippingAddress.postalCode}</li>
-								<li className="uppercase">{shippingAddress.city}</li>
-								<li className="uppercase">{shippingAddress.country}</li>
-							</ul>
+						<div className="border-2 my-5 p-4">
+							<ShippingAddress shippingAddress={shippingAddress} />
 							<div className="mt-5">
 								<Link
 									className="uppercase text-white bg-black rounded-full px-5"
@@ -82,9 +78,8 @@ const PlaceOrderScreen = () => {
 								</Link>
 							</div>
 						</div>
-						<div className="border-2 my-5">
-							<h2 className="text-lg font-bold uppercase mb-2">Payment Method</h2>
-							<div>{paymentMethod}</div>
+						<div className="border-2 my-5 p-4">
+							<PaymentMethod paymentMethod={paymentMethod} />
 							<div className="mt-5">
 								<Link
 									className="uppercase text-white bg-black rounded-full px-5"
@@ -94,8 +89,10 @@ const PlaceOrderScreen = () => {
 								</Link>
 							</div>
 						</div>
-						<div className="border-2 my-5">
-							<h2 className="text-lg font-bold uppercase mb-2">Order Items</h2>
+						<div className="border-2 my-5 ">
+							<h2 className="text-lg font-bold uppercase mb-2 px-4 pt-4">
+								Order Items
+							</h2>
 							<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 								<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
 									<div className="overflow-hidden">
@@ -176,43 +173,22 @@ const PlaceOrderScreen = () => {
 								</div>
 							</div>
 						</div>
-						<div className="border-2 my-5">
-							<h2 className="text-lg font-bold uppercase mb-2">Order Summary</h2>
-							<ul>
-								<li>
-									<div className="flex flex-row justify-between mx-10 my-2">
-										<div>Items</div>
-										<div>{itemsPrice} €</div>
-									</div>
-								</li>
-								<li>
-									<div className="flex flex-row justify-between mx-10 my-2">
-										<div>Tax</div>
-										<div>{taxPrice} €</div>
-									</div>
-								</li>
-								<li>
-									<div className="flex flex-row justify-between mx-10 my-2">
-										<div>Shipping</div>
-										<div>{shippingPrice} €</div>
-									</div>
-								</li>
-								<li>
-									<div className="flex flex-row justify-between mx-10 my-2">
-										<div>Total</div>
-										<div>{totalPrice} €</div>
-									</div>
-								</li>
-								<li className="text-center my-10">
-									<button
-										className="uppercase text-lg text-white bg-black font-bold rounded-full px-5 h-10"
-										disabled={loading}
-										onClick={placeOrderHandler}
-									>
-										{loading ? "Loading..." : "Place Order"}
-									</button>
-								</li>
-							</ul>
+						<div className="border-2 my-5 p-4">
+							<OrderSummary
+								itemsPrice={itemsPrice}
+								taxPrice={taxPrice}
+								shippingPrice={shippingPrice}
+								totalPrice={totalPrice}
+							/>
+						</div>
+						<div className="text-center my-10">
+							<button
+								className="uppercase text-lg text-white bg-black font-bold rounded-full px-5 h-10"
+								disabled={loading}
+								onClick={placeOrderHandler}
+							>
+								{loading ? "Loading..." : "Place Order"}
+							</button>
 						</div>
 					</div>
 				</div>

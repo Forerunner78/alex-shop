@@ -1,3 +1,6 @@
+import OrderSummary from "@/components/OrderSummary";
+import PaymentMethod from "@/components/PaymentMethod";
+import ShippingAddress from "@/components/ShippingAddress";
 import { getError } from "@/utils/error";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import axios from "axios";
@@ -108,112 +111,118 @@ const OrderScreen = () => {
 
 	return (
 		<>
-			<h1>{`${orderId}`}</h1>
+			<h1 className="text-center font-bold">{`ORDER ${orderId}`}</h1>
 			{loading ? (
 				<div>Loading...</div>
 			) : error ? (
 				<div>{error}</div>
 			) : (
 				<div>
-					<div>
-						<div>
-							<h2>Shipping Address</h2>
-							<div>
-								{shippingAddress.fullName}, {shippingAddress.address},{" "}
-								{shippingAddress.city}, {shippingAddress.postalCode},{" "}
-								{shippingAddress.country}
-							</div>
+					<div className="px-4">
+						<div className="border-2 my-5 p-4">
+							<ShippingAddress shippingAddress={shippingAddress} />
 							{isDelivered ? (
-								<div>Delivered on {deliveredAt}</div>
+								<div className="bg-green-200 text-green-600 rounded-full m-3 p-2">
+									Delivered on {deliveredAt}
+								</div>
 							) : (
-								<div>Not delivered</div>
+								<div className="bg-red-200 text-red-600 rounded-full m-3 p-2">
+									Not delivered
+								</div>
 							)}
 						</div>
-						<div>
-							<h2>Payment Method</h2>
-							<div>{paymentMethod}</div>
-							{isPaid ? <div>{paidAt}</div> : <div>Not paid</div>}
+						<div className="border-2 my-5 p-4">
+							<PaymentMethod paymentMethod={paymentMethod} />
+							{isPaid ? (
+								<div className="bg-green-200 text-green-600 rounded-full m-3 p-2">
+									{paidAt}
+								</div>
+							) : (
+								<div className="bg-red-200 text-red-600 rounded-full m-3 p-2">
+									Not paid
+								</div>
+							)}
 						</div>
-						<div>
-							<h2>Order Items</h2>
-							<table>
-								<thead>
-									<tr>
-										<th>Item</th>
-										<th>Quantity</th>
-										<th>Price</th>
-										<th>Subtotal</th>
-									</tr>
-								</thead>
-								<tbody>
-									{orderItems.map((item) => (
-										<tr key={item.id}>
-											<td>
-												<Link href={`/product/${item.id}`}>
-													<Image
-														src={item.image}
-														alt={item.name}
-														width={50}
-														height={50}
-													></Image>
-													&nbsp; {item.name}
-												</Link>
-											</td>
-											<td>{item.quantity}</td>
-											<td>{`${item.price} €`}</td>
-											<td>{`${item.price * item.quantity} €`}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+						<div className="border-2 my-5">
+							<h2 className="text-lg font-bold uppercase mb-2 px-4 pt-4">
+								Order Items
+							</h2>
+							<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+								<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
+									<div className="overflow-hidden"></div>
+									<table className="min-w-full text-center text-sm font-light">
+										<thead className="border-b font-medium dark:border-neutral-500">
+											<tr>
+												<th scope="col" className="px-3 py-4">
+													Item
+												</th>
+												<th scope="col" className="px-3 py-4">
+													Quantity
+												</th>
+												<th scope="col" className="px-3 py-4">
+													Price
+												</th>
+												<th scope="col" className="px-3 py-4">
+													Subtotal
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											{orderItems.map((item) => (
+												<tr
+													key={item.id}
+													className="border-t dark:border-neutral-500"
+												>
+													<td className="whitespace-nowrap px-3 py-4 font-medium">
+														<Link href={`/product/${item.id}`}>
+															<Image
+																src={item.image}
+																alt={item.name}
+																width={50}
+																height={50}
+															></Image>
+														</Link>
+													</td>
+													<td className="whitespace-nowrap px-3 py-4">
+														{item.quantity}
+													</td>
+													<td className="whitespace-nowrap px-3 py-4">{`${item.price} €`}</td>
+													<td className="whitespace-nowrap px-3 py-4">{`${(
+														Math.round(
+															item.price * item.quantity * 100
+														) / 100
+													).toFixed(2)} €`}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div>
-						<div>
-							<h2>Order Summary</h2>
-							<ul>
-								<li>
-									<div>
-										<div>Items</div>
-										<div>{`${itemsPrice} €`}</div>
+						<div className="border-2 my-5 p-4">
+							<OrderSummary
+								itemsPrice={itemsPrice}
+								taxPrice={taxPrice}
+								shippingPrice={shippingPrice}
+								totalPrice={totalPrice}
+							/>
+						</div>
+						{!isPaid && (
+							<>
+								{isPending ? (
+									<div>Loading...</div>
+								) : (
+									<div className="mt-10">
+										<PayPalButtons
+											createOrder={createOrder}
+											onApprove={onApprove}
+											onError={onError}
+										></PayPalButtons>
 									</div>
-								</li>
-								<li>
-									<div>
-										<div>Tax</div>
-										<div>{`${taxPrice} €`}</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div>Shipping</div>
-										<div>{`${shippingPrice} €`}</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div>Total</div>
-										<div>{`${totalPrice} €`}</div>
-									</div>
-								</li>
-								{!isPaid && (
-									<li>
-										{isPending ? (
-											<div>Loading...</div>
-										) : (
-											<div>
-												<PayPalButtons
-													createOrder={createOrder}
-													onApprove={onApprove}
-													onError={onError}
-												></PayPalButtons>
-											</div>
-										)}
-										{loadingPay && <div>Loading...</div>}
-									</li>
 								)}
-							</ul>
-						</div>
+								{loadingPay && <div>Loading...</div>}
+							</>
+						)}
 					</div>
 				</div>
 			)}
