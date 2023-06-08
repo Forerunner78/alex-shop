@@ -1,19 +1,13 @@
 import Link from "next/link";
 import Logo from "../../public/img/logo.jpg";
 import Image from "next/image";
-import Layout from "./Layout";
 import { useContext, useEffect, useState } from "react";
 import { Store } from "@/utils/Store";
-import { signOut, useSession } from "next-auth/react";
-import { Menu } from "@headlessui/react";
-import DropDownLink from "./DropDownLink";
-import Cookies from "js-cookie";
 import { IoCartOutline } from "react-icons/io5";
 import { IoCartSharp } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
+import DropDownMenu from "./DropDownMenu";
 
 const Header = () => {
-	const { status, data: session } = useSession();
 	const { state, dispatch } = useContext(Store);
 	const { cart } = state;
 	const [cartItemsCount, setCartItemsCount] = useState(0);
@@ -21,12 +15,6 @@ const Header = () => {
 	useEffect(() => {
 		setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
 	}, [cart.cartItems]);
-
-	const logoutClickHandler = () => {
-		Cookies.remove("cart");
-		dispatch({ type: "CART_RESET" });
-		signOut({ callbackUrl: "/login" });
-	};
 
 	return (
 		<header className="p-5 mb-10 flex flex-row justify-between">
@@ -64,30 +52,8 @@ const Header = () => {
 						</div>
 					</Link>
 				</div>
-				<div className="mx-2">
-					<CgProfile />
-					{/* {status === "loading" ? (
-						"Loading"
-					) : session?.user ? (
-						<Menu as="div">
-							<Menu.Button>{session.user.name}</Menu.Button>
-							<Menu.Items>
-								<Menu.Item>
-									<DropDownLink href="/profile">Profile</DropDownLink>
-								</Menu.Item>
-								<Menu.Item>
-									<DropDownLink href="/order-history">Order History</DropDownLink>
-								</Menu.Item>
-								<Menu.Item>
-									<a href="#" onClick={logoutClickHandler}>
-										Logout
-									</a>
-								</Menu.Item>
-							</Menu.Items>
-						</Menu>
-					) : (
-						<Link href="/login">Login</Link>
-					)} */}
+				<div className="mx-2 flex items-center">
+					<DropDownMenu />
 				</div>
 			</section>
 		</header>
