@@ -9,7 +9,14 @@ const ProductScreen = (props) => {
 	const { product } = props;
 
 	if (!product) {
-		return <div>Product not found!</div>;
+		return (
+			<div className="flex flex-col text-center">
+				<span className="text-lg">Product not found!</span>{" "}
+				<Link className="underline m-5" href="/">
+					Go back to Home
+				</Link>
+			</div>
+		);
 	}
 	return (
 		<div className="m-2">

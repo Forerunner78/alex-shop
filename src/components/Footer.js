@@ -4,7 +4,7 @@ import Visa from "./../../public/img/Visa.png";
 
 const Footer = () => {
 	return (
-		<footer className="mt-10 px-5 flex flex-row justify-between text-center">
+		<footer className="mt-10 px-5 border-t-2 flex flex-row justify-between text-center">
 			<div className="flex flex-col items-center justify-center">
 				<h1 className="uppercase text-xl">Alex Shop</h1>
 				<span className="text-xs">Copyright &copy; {new Date().getFullYear()}</span>

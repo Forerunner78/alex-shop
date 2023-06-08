@@ -133,7 +133,7 @@ const ShippingScreen = () => {
 					)}
 				</div>
 				<div className="relative">
-					<button className="absolute -left-[50%] -bottom-[50%] w-full h-10 bg-black text-white text-xl uppercase rounded-full">
+					<button className="absolute -left-[50%] -bottom-[100%] w-full h-10 bg-black text-white text-xl uppercase rounded-full">
 						Next
 					</button>
 				</div>
