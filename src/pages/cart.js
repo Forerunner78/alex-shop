@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { EmptyCart } from "@/components/EmptyCart";
 
 const CartScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -34,9 +35,7 @@ const CartScreen = () => {
 		<div className="w-full min-h-screen">
 			<h1 className="text-3xl font-bold text-center mb-10">Your Shopping Cart</h1>
 			{cartItems.length === 0 ? (
-				<div>
-					Cart is empty. <Link href="/">Go shopping</Link>
-				</div>
+				<EmptyCart />
 			) : (
 				<div className="flex flex-col">
 					<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
