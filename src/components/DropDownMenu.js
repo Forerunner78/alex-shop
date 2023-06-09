@@ -43,11 +43,7 @@ const DropDownMenu = () => {
 							<div className="py-10 text-3xl">{`Welcome ${session.user.name} !`}</div>
 							<div className="divide-y-4 divide-slate-200">
 								<div className="py-3 text-xl text-center">
-									<Link
-										className=""
-										href="/profile"
-										onClick={() => setIsOpen(false)}
-									>
+									<Link href="/profile" onClick={() => setIsOpen(false)}>
 										Profile
 									</Link>
 								</div>

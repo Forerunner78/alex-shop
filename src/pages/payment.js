@@ -2,6 +2,7 @@ import Button from "@/components/Buttons/ButtonComponent";
 import CheckoutWizard from "@/components/CheckoutWizard";
 import { Store } from "@/utils/Store";
 import Cookies from "js-cookie";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -50,12 +51,18 @@ const PaymentScreen = () => {
 					</div>
 				))}
 				<div className="flex justify-around mt-10">
-					<Button
-						className="min-w-25 px-5"
-						onClick={() => router.push("/shipping")}
-						text="&lt; Back"
-					/>
-					<Button className=" min-w-25 px-5" text="Next &gt;" />
+					<Link
+						className="min-w-25 px-5 py-1.5 h-10 bg-black text-white text-xl uppercase rounded-full flex item-center"
+						href="/shipping"
+					>
+						&lt; Back
+					</Link>
+					<Link
+						className="min-w-25 px-5 py-1.5 h-10 bg-black text-white text-xl uppercase rounded-full"
+						href="/placeorder"
+					>
+						Next &gt;
+					</Link>
 				</div>
 			</form>
 		</>
