@@ -20,7 +20,10 @@ const AddToCartButton = ({ product, className }) => {
 	};
 
 	return (
-		<button className={`${className}`} onClick={addToCartHandler}>
+		<button
+			className={`uppercase bg-black text-white rounded-full ${className}`}
+			onClick={addToCartHandler}
+		>
 			Add To Cart
 		</button>
 	);

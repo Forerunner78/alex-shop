@@ -1,3 +1,4 @@
+import Button from "@/components/Buttons/ButtonComponent";
 import CheckoutWizard from "@/components/CheckoutWizard";
 import { Store } from "@/utils/Store";
 import Cookies from "js-cookie";
@@ -49,16 +50,12 @@ const PaymentScreen = () => {
 					</div>
 				))}
 				<div className="flex justify-around mt-10">
-					<button
-						className="uppercase text-white bg-black rounded-full min-w-25 h-10 px-5"
+					<Button
+						className="min-w-25 px-5"
 						onClick={() => router.push("/shipping")}
-						type="button"
-					>
-						&lt; Back
-					</button>
-					<button className="uppercase text-white bg-black rounded-full min-w-25 h-10 px-5">
-						Next &gt;
-					</button>
+						text="&lt; Back"
+					/>
+					<Button className=" min-w-25 px-5" text="Next &gt;" />
 				</div>
 			</form>
 		</>

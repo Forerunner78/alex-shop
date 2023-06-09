@@ -106,17 +106,20 @@ const CartScreen = () => {
 						</div>
 					</div>
 					<div className="flex justify-end me-5">
-						<ul className="flex flex-col text-lg font-bold">
-							<li className="my-5">
+						<div className="flex flex-col text-lg font-bold">
+							<div className="my-5">
 								Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :{" "}
 								{cartItems.reduce((a, c) => a + c.quantity * c.price, 0)} €
-							</li>
-							<li className="grid justify-items-stretch h-10 mt-5 bg-black text-white rounded-full">
-								<button onClick={() => router.push("login?redirect=/shipping")}>
+							</div>
+							<div className="flex justify-center">
+								<button
+									className=" w-full h-10 bg-black text-white text-xl uppercase rounded-full"
+									onClick={() => router.push("login?redirect=/shipping")}
+								>
 									Check Out
 								</button>
-							</li>
-						</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			)}

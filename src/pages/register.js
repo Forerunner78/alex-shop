@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Button from "@/components/Buttons/ButtonComponent";
 
 const RegisterScreen = () => {
 	const { data: session } = useSession();
@@ -122,10 +123,8 @@ const RegisterScreen = () => {
 					<div className="text-xs text-red-500">Passwords do not match</div>
 				)}
 			</div>
-			<div className="flex justify-center m-10">
-				<button className=" w-[50%] h-10 bg-black text-white text-xl uppercase rounded-full">
-					Register
-				</button>
+			<div className="flex justify-center my-10">
+				<Button className="w-[50%]" text="Register" />
 			</div>
 		</form>
 	);

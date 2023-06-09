@@ -22,7 +22,7 @@ const DropDownMenu = () => {
 
 	return (
 		<>
-			<button className="" onClick={handleClick}>
+			<button onClick={handleClick}>
 				<CgProfile />
 			</button>
 			{isOpen ? (
