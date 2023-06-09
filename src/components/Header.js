@@ -17,7 +17,7 @@ const Header = () => {
 	}, [cart.cartItems]);
 
 	return (
-		<header className="p-5 mb-10 flex flex-row justify-between">
+		<header className="p-5 mb-10 border-b-2 flex flex-row justify-between">
 			<section>
 				<Link href="/">
 					<Image

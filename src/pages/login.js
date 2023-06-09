@@ -36,13 +36,17 @@ const LoginScreen = () => {
 
 	return (
 		<form onSubmit={handleSubmit(submitHandler)}>
-			<h1>Login</h1>
-			<div>
-				<label htmlFor="email">Email</label>
+			<h1 className="text-3xl font-bold text-center mb-10">Login</h1>
+			<div className="flex flex-col mb-6 px-4">
+				<label className="uppercase font-bold mb-2" htmlFor="email">
+					Email
+				</label>
 				<input
 					type="email"
 					id="email"
+					className="rounded border-2"
 					autoFocus
+					placeholder="Enter your email"
 					{...register("email", {
 						required: "Please enter email",
 						pattern: {
@@ -51,13 +55,17 @@ const LoginScreen = () => {
 						},
 					})}
 				></input>
-				{errors.email && <div>{errors.email.message}</div>}
+				{errors.email && <div className="text-xs text-red-500">{errors.email.message}</div>}
 			</div>
-			<div>
-				<label htmlFor="password">Password</label>
+			<div className="flex flex-col mb-6 px-4">
+				<label className="uppercase font-bold mb-2" htmlFor="password">
+					Password
+				</label>
 				<input
 					type="password"
 					id="password"
+					className="rounded border-2"
+					placeholder="Enter your password"
 					{...register("password", {
 						required: "Please enter password",
 						minLength: {
@@ -66,14 +74,21 @@ const LoginScreen = () => {
 						},
 					})}
 				></input>
-				{errors.password && <div>{errors.password.message}</div>}
+				{errors.password && (
+					<div className="text-xs text-red-500">{errors.password.message}</div>
+				)}
 			</div>
-			<div>
-				<button>Login</button>
+			<div className="flex justify-center m-10">
+				<button className=" w-[50%] h-10 bg-black text-white text-xl uppercase rounded-full">
+					Login
+				</button>
 			</div>
-			<div>
+
+			<div className="text-sm text-center">
 				Don&apos;t have an account? &nbsp;
-				<Link href={`/register?redirect=${redirect || "/"}`}>Register</Link>
+				<Link className="underline" href={`/register?redirect=${redirect || "/"}`}>
+					Register
+				</Link>
 			</div>
 		</form>
 	);
