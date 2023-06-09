@@ -39,22 +39,32 @@ const ProfileScreen = () => {
 	return (
 		<>
 			<form onSubmit={handleSubmit(submitHandler)}>
-				<h1>Update Profile</h1>
-				<div>
-					<label htmlFor="name">Name</label>
+				<h1 className="text-3xl font-bold text-center mb-10">Update Your Profile</h1>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold mb-2" htmlFor="name">
+						Name
+					</label>
 					<input
 						type="text"
 						id="name"
+						className="rounded border-2"
 						autoFocus
+						placeholder="Enter your full name"
 						{...register("name", { required: "Please enter name" })}
 					/>
-					{errors.name && <div>{errors.name.message}</div>}
+					{errors.name && (
+						<div className="text-xs text-red-500">{errors.name.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="email">Email</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold mb-2" htmlFor="email">
+						Email
+					</label>
 					<input
 						type="email"
 						id="email"
+						className="rounded border-2"
+						placeholder="Enter your email"
 						autoFocus
 						{...register("email", {
 							required: "Please enter email",
@@ -64,13 +74,19 @@ const ProfileScreen = () => {
 							},
 						})}
 					></input>
-					{errors.email && <div>{errors.email.message}</div>}
+					{errors.email && (
+						<div className="text-xs text-red-500">{errors.email.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="password">Password</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold mb-2" htmlFor="password">
+						Password
+					</label>
 					<input
 						type="password"
 						id="password"
+						className="rounded border-2"
+						placeholder="Enter your password"
 						{...register("password", {
 							required: "Please enter password",
 							minLength: {
@@ -79,13 +95,19 @@ const ProfileScreen = () => {
 							},
 						})}
 					></input>
-					{errors.password && <div>{errors.password.message}</div>}
+					{errors.password && (
+						<div className="text-xs text-red-500">{errors.password.message}</div>
+					)}
 				</div>
-				<div>
-					<label htmlFor="confirmPassword">Confirm Password</label>
+				<div className="flex flex-col mb-6 px-4">
+					<label className="uppercase font-bold mb-2" htmlFor="confirmPassword">
+						Confirm Password
+					</label>
 					<input
 						type="password"
 						id="confirmPassword"
+						className="rounded border-2"
+						placeholder="Confirm your password"
 						{...register("confirmPassword", {
 							required: "Please enter your password a second time",
 							validate: (value) => value === getValues("password"),
@@ -95,13 +117,17 @@ const ProfileScreen = () => {
 							},
 						})}
 					></input>
-					{errors.confirmPassword && <div>{errors.confirmPassword.message}</div>}
+					{errors.confirmPassword && (
+						<div className="text-xs text-red-500">{errors.confirmPassword.message}</div>
+					)}
 					{errors.confirmPassword && errors.confirmPassword.type === "validate" && (
-						<div>Passwords do not match</div>
+						<div className="text-xs text-red-500">Passwords do not match</div>
 					)}
 				</div>
-				<div>
-					<button>Update Profile</button>
+				<div className="flex justify-center m-10">
+					<button className=" w-[100%] h-10 bg-black text-white text-xl uppercase rounded-full">
+						Update your profile
+					</button>
 				</div>
 			</form>
 		</>
