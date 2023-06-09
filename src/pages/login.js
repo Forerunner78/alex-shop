@@ -5,6 +5,7 @@ import { getError } from "@/utils/error";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Button from "@/components/Buttons/ButtonComponent";
 
 const LoginScreen = () => {
 	const { data: session } = useSession();
@@ -79,9 +80,7 @@ const LoginScreen = () => {
 				)}
 			</div>
 			<div className="flex justify-center m-10">
-				<button className=" w-[50%] h-10 bg-black text-white text-xl uppercase rounded-full">
-					Login
-				</button>
+				<Button className="w-[50%]" text="Login" />
 			</div>
 
 			<div className="text-sm text-center">

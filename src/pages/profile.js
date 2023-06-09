@@ -1,3 +1,4 @@
+import Button from "@/components/Buttons/ButtonComponent";
 import { getError } from "@/utils/error";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
@@ -125,9 +126,7 @@ const ProfileScreen = () => {
 					)}
 				</div>
 				<div className="flex justify-center m-10">
-					<button className=" w-[100%] h-10 bg-black text-white text-xl uppercase rounded-full">
-						Update your profile
-					</button>
+					<Button className="w-[100%]" text="Update your profile" />
 				</div>
 			</form>
 		</>

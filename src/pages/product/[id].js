@@ -1,4 +1,4 @@
-import AddToCartButton from "@/components/AddToCartButton";
+import AddToCartButton from "@/components/Buttons/AddToCartButton";
 import Image from "next/image";
 import Link from "next/link";
 import db from "@/utils/db";
@@ -41,13 +41,8 @@ const ProductScreen = (props) => {
 				<div className="font-bold text-center text-xl mb-5">{product.price} €</div>
 				<div className="text-justify indent-10 mb-10">{product.shortDescription}</div>
 
-				<div>
-					<AddToCartButton
-						product={product}
-						className={
-							"w-full h-10 bg-black text-white text-2xl uppercase rounded-full"
-						}
-					/>
+				<div className="flex justify-center">
+					<AddToCartButton product={product} className={"w-[75%] h-10 text-2xl"} />
 				</div>
 			</div>
 		</div>

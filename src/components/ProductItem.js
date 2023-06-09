@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import AddToCartButton from "./AddToCartButton";
+import AddToCartButton from "./Buttons/AddToCartButton";
 import Rating from "./Rating";
 
 const ProductItem = ({ product }) => {
@@ -15,10 +15,7 @@ const ProductItem = ({ product }) => {
 				</Link>
 				<Rating value={product.rating} numReview={product.numReviews} />
 				<h3 className="underline m-2 font-bold">{`${product.price} €`}</h3>
-				<AddToCartButton
-					product={product}
-					className={"m-5 p-1 bg-black text-white rounded-full"}
-				/>
+				<AddToCartButton product={product} className="p-1 w-full" />
 			</div>
 		</div>
 	);

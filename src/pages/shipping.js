@@ -1,3 +1,4 @@
+import Button from "@/components/Buttons/ButtonComponent";
 import CheckoutWizard from "@/components/CheckoutWizard";
 import { Store } from "@/utils/Store";
 import Cookies from "js-cookie";
@@ -133,9 +134,7 @@ const ShippingScreen = () => {
 					)}
 				</div>
 				<div className="relative">
-					<button className="absolute -left-[50%] -bottom-[100%] w-full h-10 bg-black text-white text-xl uppercase rounded-full">
-						Next
-					</button>
+					<Button className="absolute -left-[50%] -bottom-[100%] w-full" text="Next" />
 				</div>
 			</form>
 		</>
