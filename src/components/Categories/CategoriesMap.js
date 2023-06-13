@@ -10,36 +10,26 @@ import CategoriesCard from "./CategoriesCard";
 
 const CategoriesMap = () => {
 	return (
-		<div className="mx-2 mt-10">
+		<div className="mx-10 mt-10">
 			<h1 className="text-3xl font-bold text-center mb-10">Visit our products !</h1>
-			<div className="grid grid-rows-4 grid-cols-4 auto-rows-min gap-2 mt-10 p-2 bg-slate-100">
-				<div className="relative row-span-2 bg-slate-100 text-black h-30 flex justify-center items-center py-2">
-					<CategoriesCard categoryText="Dress" image={Dress} width={100} height={150} />
+			<div className="grid grid-rows-4 md:grid-rows-2 grid-cols-4 md:grid-cols-6 gap-2 md:gap-5 lg:gap-10 mt-10 p-5 bg-slate-100">
+				<div className="relative row-span-2 ">
+					<CategoriesCard categoryText="Dress" image={Dress} />
 				</div>
-				<div className="relative row-span-4 col-span-1 bg-slate-100 text-black flex justify-center items-center">
-					<CategoriesCard
-						categoryText="T-shirt"
-						image={Tshirt}
-						width={100}
-						height={150}
-					/>
+				<div className="relative row-span-4 md:row-span-2 col-span-1">
+					<CategoriesCard categoryText="T-shirt" image={Tshirt} />
 				</div>
-				<div className="relative row-span-2 bg-slate-100 text-black h-30 flex justify-center items-center">
-					<CategoriesCard categoryText="Pant" image={Pant} width={100} height={100} />
+				<div className="relative row-span-2  ">
+					<CategoriesCard categoryText="Pant" image={Pant} />
 				</div>
-				<div className="relative row-span-2 bg-slate-100 h-30 text-black flex justify-center items-center">
-					<CategoriesCard categoryText="Shirts" image={Shirt} width={100} height={150} />
+				<div className="relative row-span-4 md:row-span-2 col-span-1">
+					<CategoriesCard categoryText="Accessories" image={Accessories} />
 				</div>
-				<div className="relative row-span-2 bg-slate-100 h-30 text-black flex justify-center items-center">
-					<CategoriesCard categoryText="Pull" image={Pull} width={110} height={150} />
+				<div className="relative row-span-2">
+					<CategoriesCard categoryText="Shirts" image={Shirt} />
 				</div>
-				<div className="relative row-span-2 col-span-2 bg-slate-100 text-black flex justify-center items-center mx-10">
-					<CategoriesCard
-						categoryText="Accessories"
-						image={Accessories}
-						width={110}
-						height={110}
-					/>
+				<div className="relative row-span-2">
+					<CategoriesCard categoryText="Pull" image={Pull} />
 				</div>
 			</div>
 		</div>
