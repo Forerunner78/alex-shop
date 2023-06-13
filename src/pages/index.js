@@ -1,4 +1,4 @@
-import CategoriesMap from "@/components/CategoriesMap";
+import CategoriesMap from "@/components/Categories/CategoriesMap";
 import ProductItem from "@/components/ProductItem";
 import Product from "@/models/productModel";
 import db from "@/utils/db";
