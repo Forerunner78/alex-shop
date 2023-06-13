@@ -570,7 +570,15 @@ video {
   left: 1rem;
 }
 
+.left-\[50\%\] {
+  left: 50%;
+}
+
 .top-1\/2 {
+  top: 50%;
+}
+
+.top-\[50\%\] {
   top: 50%;
 }
 
@@ -580,10 +588,6 @@ video {
 
 .col-span-1 {
   grid-column: span 1 / span 1;
-}
-
-.col-span-2 {
-  grid-column: span 2 / span 2;
 }
 
 .row-span-2 {
@@ -618,6 +622,11 @@ video {
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
 }
 
 .my-10 {
@@ -701,6 +710,10 @@ video {
   height: 20px;
 }
 
+.h-\[25vh\] {
+  height: 25vh;
+}
+
 .h-\[3px\] {
   height: 3px;
 }
@@ -746,13 +759,23 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.-translate-x-\[50\%\] {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.auto-rows-min {
-  grid-auto-rows: min-content;
+.-translate-y-\[50\%\] {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .grid-cols-2 {
@@ -838,6 +861,10 @@ video {
   border-radius: 0.5rem;
 }
 
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
 .border-2 {
   border-width: 2px;
 }
@@ -888,6 +915,14 @@ video {
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
+.bg-slate-100\/25 {
+  background-color: rgb(241 245 249 / 0.25);
+}
+
+.bg-slate-100\/50 {
+  background-color: rgb(241 245 249 / 0.5);
+}
+
 .bg-slate-400\/75 {
   background-color: rgb(148 163 184 / 0.75);
 }
@@ -895,6 +930,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .p-1 {
@@ -1003,6 +1043,10 @@ video {
   font-size: 12px;
 }
 
+.text-\[50\%\] {
+  font-size: 50%;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1021,26 +1065,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-\[10\%\] {
-  font-size: 10%;
-}
-
-.text-\[20\%\] {
-  font-size: 20%;
-}
-
-.text-\[50\%\] {
-  font-size: 50%;
-}
-
-.text-\[70\%\] {
-  font-size: 70%;
-}
-
-.text-\[65\%\] {
-  font-size: 65%;
 }
 
 .font-bold {
@@ -1119,15 +1143,73 @@ video {
   }
 }
 
+@media (min-width: 320px) {
+  .xs\:h-\[50vh\] {
+    height: 50vh;
+  }
+
+  .xs\:h-\[30vh\] {
+    height: 30vh;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:-mx-6 {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
   }
 
+  .sm\:h-\[60vh\] {
+    height: 60vh;
+  }
+
+  .sm\:h-\[50vh\] {
+    height: 50vh;
+  }
+
+  .sm\:h-\[40vh\] {
+    height: 40vh;
+  }
+
   .sm\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+  }
+
+  .sm\:text-\[75\%\] {
+    font-size: 75%;
+  }
+
+  .sm\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:row-span-2 {
+    grid-row: span 2 / span 2;
+  }
+
+  .md\:mx-10 {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
+
+  .md\:h-\[50vh\] {
+    height: 50vh;
+  }
+
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .md\:grid-rows-2 {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:gap-5 {
+    gap: 1.25rem;
   }
 }
 
@@ -1137,8 +1219,17 @@ video {
     margin-right: -2rem;
   }
 
+  .lg\:gap-10 {
+    gap: 2.5rem;
+  }
+
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
