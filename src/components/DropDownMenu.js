@@ -26,33 +26,32 @@ const DropDownMenu = () => {
 				<CgProfile />
 			</button>
 			{isOpen ? (
-				<div className="min-w-[70vw] flex flex-col justify-between z-30 items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black text-white rounded-lg backdrop-blur-md py-30">
+				<div className="min-w-[10vw] flex flex-col justify-between z-30 items-center absolute top-[50vh] left-[50vw] -translate-x-1/2 -translate-y-1/2 bg-black text-white rounded-lg backdrop-blur-md py-30">
 					{status === "loading" ? (
 						"Loading"
 					) : session?.user ? (
 						<div>
 							<div className="flex justify-end">
 								<button
-									className="w-5 mt-3 border-2 border-white"
+									className="w-5 mt-3 me-3 border-2 border-white"
 									onClick={() => setIsOpen(false)}
 								>
 									X
 								</button>
 							</div>
 
-							<div className="py-10 text-3xl">{`Welcome ${session.user.name} !`}</div>
-							<div className="divide-y-4 divide-slate-200">
+							<div className="py-5 text-3xl text-center">{`Welcome ${session.user.name} !`}</div>
+							<div className="">
 								<div className="py-3 text-xl text-center">
 									<Link href="/profile" onClick={() => setIsOpen(false)}>
 										Profile
 									</Link>
 								</div>
 
-								<div className="py-3 text-xl text-center">
+								<div className="border-y-4 py-3 text-xl text-center">
 									<Link href="/order-history" onClick={() => setIsOpen(false)}>
 										Order History
 									</Link>
-									<span className="h-[3px] inline-block bg-white absolute left-[12.5%] -bottom-1  w-[75%]" />
 								</div>
 								<div className="py-3 text-xl text-center">
 									<Link href="#" onClick={logoutClickHandler}>
@@ -62,9 +61,17 @@ const DropDownMenu = () => {
 							</div>
 						</div>
 					) : (
-						<Link className="py-20" href="/login" onClick={() => setIsOpen(false)}>
-							Click to login
-						</Link>
+						<div className="relative p-10">
+							<Link className="" href="/login" onClick={() => setIsOpen(false)}>
+								Login
+							</Link>
+							<button
+								className="absolute w-5 top-0.5 right-1.5 mt-1 border-2 border-white text-xs"
+								onClick={() => setIsOpen(false)}
+							>
+								X
+							</button>
+						</div>
 					)}
 				</div>
 			) : null}
