@@ -11,6 +11,7 @@ import CategoriesCard from "./CategoriesCard";
 const CategoriesMap = () => {
 	return (
 		<div className="mx-5 md:mx-10 mt-10">
+
 			<h1 className="text-3xl font-bold text-center mb-10">Visit our products !</h1>
 			<div className="grid grid-rows-4 md:grid-rows-2 grid-cols-4 md:grid-cols-6 gap-2 md:gap-5 lg:gap-10 mt-10 p-5 bg-slate-100">
 				<div className="relative row-span-2 ">
