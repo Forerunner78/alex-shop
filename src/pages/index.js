@@ -1,3 +1,4 @@
+import Carousel from "@/components/Carousel";
 import CategoriesMap from "@/components/Categories/CategoriesMap";
 import ProductItem from "@/components/ProductItem";
 import Product from "@/models/productModel";
@@ -11,6 +12,7 @@ export default function Home({ products }) {
 	};
 	return (
 		<>
+			<Carousel />
 			<div className="grid gap-4 grid-cols-2">
 				{products.map((product) => (
 					<ProductItem product={product} key={product.id} />
