@@ -27,7 +27,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 					<StoreProvider>
 						<PayPalScriptProvider deferLoading={true}>
 							<ToastContainer limit={1} />
-							<main className="w-full min-h-screen">
+							<main className="w-[100vw] min-h-screen relative">
 								<Header />
 								<main className="w-full min-h-screen">
 									{Component.auth ? (

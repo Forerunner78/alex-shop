@@ -16,17 +16,46 @@ const Header = () => {
 		setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
 	}, [cart.cartItems]);
 
+	const [scrollPosition, setScrollPosition] = useState(0);
+	const [headerBackground, setHeaderBackground] = useState("transparent");
+	console.log(scrollPosition);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const position = window.scrollY;
+			setScrollPosition(position);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (scrollPosition > 0) {
+			setHeaderBackground("white");
+		} else {
+			setHeaderBackground("transparent");
+		}
+	}, [scrollPosition]);
+
+	const headerLimit = headerBackground === "white" ? "border-b-2" : "";
+
 	return (
-		<header className="p-5 w-[100vw] flex flex-row justify-between z-50 bg-transparent">
+		<header
+			className={`fixed top-0 p-5 w-[100vw] flex flex-row justify-between z-50 bg-${headerBackground} ${headerLimit}`}
+		>
 			<section className="flex items-center">
 				<Link href="/">
-					<h1 className="text-center text-3xl uppercase flex flex-row">
-						<div className="px-2">Alex</div>
-						<div className="px-2">Shop</div>
+					<h1 className="text-center text-3xl md:text-5xl uppercase flex flex-row">
+						<div className="px-2 md:px-4">Alex</div>
+						<div className="px-2 md:px-4">Shop</div>
 					</h1>
 				</Link>
 			</section>
-			<section className="flex flex-row items-center text-2xl">
+			<section className="flex flex-row items-center text-2xl md:text-3xl">
 				<div className="mx-4">
 					<Link href="/cart">
 						<div className="relative ">
