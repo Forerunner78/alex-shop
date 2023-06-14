@@ -1,11 +1,10 @@
-import Carousel from "@/components/Carousel";
+import Carousel from "@/components/Carousel/CarouselItem";
 import CategoriesMap from "@/components/Categories/CategoriesMap";
 import ProductItem from "@/components/ProductItem";
 import Product from "@/models/productModel";
 import db from "@/utils/db";
 
 export default function Home({ products }) {
-	console.log(products);
 	const getCategories = (products) => {
 		const categoriesArray = [];
 		return categoriesArray;
@@ -13,11 +12,11 @@ export default function Home({ products }) {
 	return (
 		<>
 			<Carousel />
-			<div className="grid gap-4 grid-cols-2">
+			{/* <div className="grid gap-4 grid-cols-2">
 				{products.map((product) => (
 					<ProductItem product={product} key={product.id} />
 				))}
-			</div>
+			</div> */}
 			<CategoriesMap />
 		</>
 	);

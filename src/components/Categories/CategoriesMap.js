@@ -3,7 +3,7 @@ import Tshirt from "../../../public/productImages/black_tshirt.jpeg";
 import Pant from "../../../public/productImages/brown_pant.jpg";
 import Shirt from "../../../public/productImages/beige_shirt.jpeg";
 import Pull from "../../../public/productImages/white_pull.jpeg";
-import Accessories from "../../../public/productImages/Neckless.jpg";
+import Accessories from "../../../public/productImages/neckless.jpg";
 import CategoriesCard from "./CategoriesCard";
 
 const CategoriesMap = () => {
