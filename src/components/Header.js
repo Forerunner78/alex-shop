@@ -17,29 +17,17 @@ const Header = () => {
 	}, [cart.cartItems]);
 
 	return (
-		<header className="p-5 mb-10 border-b-2 flex flex-row justify-between">
-			<section>
+		<header className="p-5 w-[100vw] flex flex-row justify-between z-50 bg-transparent">
+			<section className="flex items-center">
 				<Link href="/">
-					<Image
-						src={Logo}
-						alt="Logo of the website"
-						className=" rounded-circle"
-						width={70}
-						height={70}
-						priority
-					/>
+					<h1 className="text-center text-3xl uppercase flex flex-row">
+						<div className="px-2">Alex</div>
+						<div className="px-2">Shop</div>
+					</h1>
 				</Link>
 			</section>
-			<section className="flex items-center">
-				<h1 className="text-center text-3xl uppercase">
-					<Link href="/">
-						Alex
-						<br /> Shop
-					</Link>
-				</h1>
-			</section>
-			<section className="flex flex-row justify-between items-center text-2xl">
-				<div className="mx-2">
+			<section className="flex flex-row items-center text-2xl">
+				<div className="mx-4">
 					<Link href="/cart">
 						<div className="relative ">
 							{cartItemsCount > 0 ? <IoCartSharp /> : <IoCartOutline />}
@@ -52,7 +40,7 @@ const Header = () => {
 						</div>
 					</Link>
 				</div>
-				<div className="mx-2 flex items-center">
+				<div className="mx-4 flex items-center">
 					<DropDownMenu />
 				</div>
 			</section>
