@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
 import { getError } from "@/utils/error";
@@ -12,7 +11,7 @@ import PasswordInput from "@/components/Form/PasswordInput";
 import ConfirmPasswordInput from "@/components/Form/ConfirmPasswordInput";
 import FullNameInput from "@/components/Form/FullNameInput";
 
-const RegisterScreen = () => {
+const CreateAccountScreen = () => {
 	const { data: session } = useSession();
 	const router = useRouter();
 	const { redirect } = router.query;
@@ -50,10 +49,10 @@ const RegisterScreen = () => {
 			<PasswordInput register={register} errors={errors} />
 			<ConfirmPasswordInput register={register} errors={errors} />
 			<div className="flex justify-center my-10">
-				<Button className="w-[50%]" text="Register" />
+				<Button className="w-[50%]" text="Create Account" />
 			</div>
 		</form>
 	);
 };
 
-export default RegisterScreen;
+export default CreateAccountScreen;

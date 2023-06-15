@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Logo from "../../public/img/logo.jpg";
-import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { Store } from "@/utils/Store";
 import { IoCartOutline } from "react-icons/io5";
@@ -49,7 +47,7 @@ const Header = () => {
 		>
 			<section className="flex items-center">
 				<Link href="/">
-					<h1 className="text-center text-3xl md:text-5xl uppercase flex flex-row">
+					<h1 className="text-center text-3xl md:text-5xl 2xl:text-7xl md:ps-10 xl:ps-[15vw] uppercase flex flex-row">
 						<div className="px-2 md:px-4">Alex</div>
 						<div className="px-2 md:px-4">Shop</div>
 					</h1>
