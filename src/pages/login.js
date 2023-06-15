@@ -48,8 +48,8 @@ const LoginScreen = () => {
 
 			<div className="text-sm text-center">
 				Don&apos;t have an account? &nbsp;
-				<Link className="underline" href={`/register?redirect=${redirect || "/"}`}>
-					Register
+				<Link className="underline" href={`/createaccount?redirect=${redirect || "/"}`}>
+					Create an account
 				</Link>
 			</div>
 		</form>

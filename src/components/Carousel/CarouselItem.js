@@ -18,7 +18,7 @@ const Carousel = () => {
 	};
 
 	return (
-		<div className="relative">
+		<div className="relative max-w-[100vw] overflow-hidden">
 			<div
 				className={`transition ease-in-out duration-500`}
 				style={{
