@@ -46,7 +46,7 @@ const RegisterScreen = () => {
 		<form onSubmit={handleSubmit(submitHandler)}>
 			<h1 className="text-3xl font-bold text-center mb-10">Create Account</h1>
 			<FullNameInput register={register} errors={errors} />
-			<EmailInput />
+			<EmailInput register={register} errors={errors} />
 			<PasswordInput register={register} errors={errors} />
 			<ConfirmPasswordInput register={register} errors={errors} />
 			<div className="flex justify-center my-10">
