@@ -11,6 +11,8 @@ import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CityInput from "@/components/Form/CityInput";
 import CountryInput from "@/components/Form/CountryInput";
+import Layout from "@/components/Layout";
+import PageTitle from "@/components/PageTitle";
 
 const ShippingScreen = () => {
 	const {
@@ -50,17 +52,22 @@ const ShippingScreen = () => {
 	return (
 		<>
 			<CheckoutWizard activeStep={1} />
-			<h1 className="text-3xl font-bold text-center mb-10">Your Shipping Address</h1>
-			<form className="grid grid-cols-2" onSubmit={handleSubmit(submitHandler)}>
-				<FullNameInput register={register} errors={errors} />
-				<AddressInput register={register} errors={errors} />
-				<CityInput register={register} errors={errors} />
-				<PostalCodeInput register={register} errors={errors} />
-				<CountryInput register={register} errors={errors} />
-				<div className="relative">
-					<Button className="absolute -left-[50%] -bottom-[100%] w-full" text="Next" />
-				</div>
-			</form>
+			<Layout>
+				<PageTitle title="Your Shipping Address" />
+				<form className="grid grid-cols-2" onSubmit={handleSubmit(submitHandler)}>
+					<FullNameInput register={register} errors={errors} />
+					<AddressInput register={register} errors={errors} />
+					<CityInput register={register} errors={errors} />
+					<PostalCodeInput register={register} errors={errors} />
+					<CountryInput register={register} errors={errors} />
+					<div className="relative">
+						<Button
+							className="absolute -left-[50%] -bottom-[130%] w-full"
+							text="Next"
+						/>
+					</div>
+				</form>
+			</Layout>
 		</>
 	);
 };

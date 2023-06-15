@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { EmptyCart } from "@/components/EmptyCart";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/PageTitle";
 
 const CartScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -33,7 +34,7 @@ const CartScreen = () => {
 
 	return (
 		<Layout>
-			<h1 className="text-3xl md:text-4xl font-bold text-center mb-10">Your Shopping Cart</h1>
+			<PageTitle title="Your Shopping Cart" />
 			{cartItems.length === 0 ? (
 				<EmptyCart />
 			) : (
