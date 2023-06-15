@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { EmptyCart } from "@/components/EmptyCart";
+import Layout from "@/components/Layout";
 
 const CartScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -31,8 +32,8 @@ const CartScreen = () => {
 	};
 
 	return (
-		<div className="w-full min-h-screen">
-			<h1 className="text-3xl font-bold text-center mb-10">Your Shopping Cart</h1>
+		<Layout>
+			<h1 className="text-3xl md:text-4xl font-bold text-center mb-10">Your Shopping Cart</h1>
 			{cartItems.length === 0 ? (
 				<EmptyCart />
 			) : (
@@ -41,8 +42,8 @@ const CartScreen = () => {
 						<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
 							<div className="overflow-hidden">
 								<table className="min-w-full text-center text-sm font-light">
-									<thead className="border-b font-medium dark:border-neutral-500">
-										<tr>
+									<thead className="font-medium">
+										<tr className="md:text-xl">
 											<th scope="col" className="px-3 py-4">
 												Item
 											</th>
@@ -61,16 +62,16 @@ const CartScreen = () => {
 										{cartItems.map((item) => (
 											<tr
 												key={item._id}
-												className="border-b dark:border-neutral-500"
+												className="border-b-black border-t-black border-2 md:text-lg"
 											>
-												<td className="whitespace-nowrap px-3 py-4 font-medium">
-													<Link href={`/product/${item.id}`}>
+												<td className="relative whitespace-nowrap px-3 py-4 my-5 font-medium flex justify-center h-[20vh] md:h-[30vh]">
+													<Link href={`/product/${item.id}`} className="">
 														<Image
 															src={item.image}
 															alt={item.name}
-															width={50}
-															height={50}
-														></Image>
+															fill
+															className="object-contain"
+														/>
 													</Link>
 												</td>
 												<td className="whitespace-nowrap px-3 py-4">
@@ -105,7 +106,7 @@ const CartScreen = () => {
 						</div>
 					</div>
 					<div className="flex justify-end me-5">
-						<div className="flex flex-col text-lg font-bold">
+						<div className="flex flex-col text-lg font-bold mt-5">
 							<div className="my-5">
 								Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :{" "}
 								{cartItems.reduce((a, c) => a + c.quantity * c.price, 0)} €
@@ -122,7 +123,7 @@ const CartScreen = () => {
 					</div>
 				</div>
 			)}
-		</div>
+		</Layout>
 	);
 };
 
