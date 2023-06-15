@@ -33,17 +33,17 @@ const Header = () => {
 
 	useEffect(() => {
 		if (scrollPosition > 0) {
-			setHeaderBackground("white");
+			setHeaderBackground("bg-white");
 		} else {
-			setHeaderBackground("transparent");
+			setHeaderBackground("bg-transparent");
 		}
 	}, [scrollPosition]);
 
-	const headerLimit = headerBackground === "white" ? "border-b-2" : "";
+	const headerLimit = headerBackground === "bg-white" ? "border-b-2" : "";
 
 	return (
 		<header
-			className={`fixed top-0 p-5 w-[100vw] flex flex-row justify-between z-50 bg-${headerBackground} ${headerLimit}`}
+			className={`fixed top-0 p-5 w-[100vw] flex flex-row justify-between z-50 ${headerBackground} ${headerLimit}`}
 		>
 			<section className="flex items-center">
 				<Link href="/">
