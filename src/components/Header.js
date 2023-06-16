@@ -16,7 +16,6 @@ const Header = () => {
 
 	const [scrollPosition, setScrollPosition] = useState(0);
 	const [headerBackground, setHeaderBackground] = useState("transparent");
-	console.log(scrollPosition);
 
 	useEffect(() => {
 		const handleScroll = () => {
