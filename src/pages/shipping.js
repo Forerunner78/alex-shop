@@ -1,6 +1,5 @@
 import Button from "@/components/Buttons/ButtonComponent";
 import CheckoutWizard from "@/components/CheckoutWizard";
-import ErrorMessage from "@/components/ErrorMessage";
 import AddressInput from "@/components/Form/AddressInput";
 import PostalCodeInput from "@/components/Form/PostalCodeInput";
 import FullNameInput from "@/components/Form/FullNameInput";
@@ -52,9 +51,12 @@ const ShippingScreen = () => {
 	return (
 		<>
 			<CheckoutWizard activeStep={1} />
-			<Layout>
+			<Layout className="mb-[15vh]">
 				<PageTitle title="Your Shipping Address" />
-				<form className="grid grid-cols-2" onSubmit={handleSubmit(submitHandler)}>
+				<form
+					className="grid grid-cols-1 sm:grid-cols-2"
+					onSubmit={handleSubmit(submitHandler)}
+				>
 					<FullNameInput register={register} errors={errors} />
 					<AddressInput register={register} errors={errors} />
 					<CityInput register={register} errors={errors} />
@@ -62,7 +64,7 @@ const ShippingScreen = () => {
 					<CountryInput register={register} errors={errors} />
 					<div className="relative">
 						<Button
-							className="absolute -left-[50%] -bottom-[130%] w-full"
+							className="absolute sm:-left-[50%] -bottom-[17vh] sm:-bottom-[130%] w-full"
 							text="Next"
 						/>
 					</div>

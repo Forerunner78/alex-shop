@@ -151,7 +151,7 @@ const OrderScreen = () => {
 								<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
 									<div className="overflow-hidden"></div>
 									<table className="min-w-full text-center text-sm font-light">
-										<thead className="border-b font-medium dark:border-neutral-500">
+										<thead className="border-b font-medium">
 											<tr>
 												<th scope="col" className="px-3 py-4">
 													Item
@@ -169,10 +169,7 @@ const OrderScreen = () => {
 										</thead>
 										<tbody>
 											{orderItems.map((item) => (
-												<tr
-													key={item.id}
-													className="border-t dark:border-neutral-500"
-												>
+												<tr key={item.id} className="border-t">
 													<td className="whitespace-nowrap px-3 py-4 font-medium">
 														<Link href={`/product/${item.id}`}>
 															<Image
