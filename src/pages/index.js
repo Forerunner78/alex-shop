@@ -5,19 +5,15 @@ import Product from "@/models/productModel";
 import db from "@/utils/db";
 
 export default function Home({ products }) {
-	const getCategories = (products) => {
-		const categoriesArray = [];
-		return categoriesArray;
-	};
 	return (
 		<>
-			<Carousel />
+			<Carousel products={products} />
 			{/* <div className="grid gap-4 grid-cols-2">
 				{products.map((product) => (
 					<ProductItem product={product} key={product.id} />
 				))}
 			</div> */}
-			<CategoriesMap />
+			<CategoriesMap products={products} />
 		</>
 	);
 }

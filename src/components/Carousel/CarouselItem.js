@@ -7,7 +7,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import CarouselCard from "./CarouselCard";
 
-const Carousel = () => {
+const Carousel = ({ products }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 
 	const prevSlide = () => {
@@ -16,6 +16,9 @@ const Carousel = () => {
 	const nextSlide = () => {
 		setCurrentSlide(currentSlide === 2 ? 0 : currentSlide + 1);
 	};
+
+	const newestProducts = (products) => {};
+	const bestSalesProducts = (products) => {};
 
 	return (
 		<div className="relative max-w-[100vw] overflow-hidden">
@@ -33,10 +36,10 @@ const Carousel = () => {
 						<CarouselCard image={image1} text="Discover the newest products" />
 					</div>
 					<div className="relative w-[100vw]">
-						<CarouselCard image={image2} text="Discover the best sells" />
+						<CarouselCard image={image2} text="Discover the best sales" />
 					</div>
 					<div className="relative w-[100vw]">
-						<CarouselCard image={image3} text="Uncover the latest trends" />
+						<CarouselCard image={image3} text="Uncover the latest trends" query="all" />
 					</div>
 				</div>
 			</div>
