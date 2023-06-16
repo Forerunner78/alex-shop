@@ -12,22 +12,22 @@ const CategoriesMap = () => {
 			<h1 className="text-3xl font-bold text-center mb-10">Visit our products !</h1>
 			<div className="grid grid-rows-4 md:grid-rows-2 grid-cols-4 md:grid-cols-6 gap-2 md:gap-5 lg:gap-10 mt-10 p-5 bg-slate-100">
 				<div className="relative row-span-2 ">
-					<CategoriesCard categoryText="Dress" image={Dress} />
+					<CategoriesCard category="Dress" image={Dress} />
 				</div>
 				<div className="relative row-span-4 md:row-span-2 col-span-1">
-					<CategoriesCard categoryText="T-shirt" image={Tshirt} />
+					<CategoriesCard category="T-Shirt" image={Tshirt} />
 				</div>
 				<div className="relative row-span-2  ">
-					<CategoriesCard categoryText="Pant" image={Pant} />
+					<CategoriesCard category="Pant" image={Pant} />
 				</div>
 				<div className="relative row-span-4 md:row-span-2 col-span-1">
-					<CategoriesCard categoryText="Accessories" image={Accessories} />
+					<CategoriesCard category="Accessories" image={Accessories} />
 				</div>
 				<div className="relative row-span-2">
-					<CategoriesCard categoryText="Shirts" image={Shirt} />
+					<CategoriesCard category="Shirt" image={Shirt} />
 				</div>
 				<div className="relative row-span-2">
-					<CategoriesCard categoryText="Pull" image={Pull} />
+					<CategoriesCard category="Pull" image={Pull} />
 				</div>
 			</div>
 		</div>
