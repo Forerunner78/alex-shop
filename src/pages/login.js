@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Button from "@/components/Buttons/ButtonComponent";
 import EmailInput from "@/components/Form/EmailInput";
 import PasswordInput from "@/components/Form/PasswordInput";
+import Layout from "@/components/Layout";
 
 const LoginScreen = () => {
 	const { data: session } = useSession();
@@ -38,21 +39,33 @@ const LoginScreen = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
-			<h1 className="text-3xl font-bold text-center mb-10">Login</h1>
-			<EmailInput register={register} errors={errors} />
-			<PasswordInput register={register} errors={errors} />
-			<div className="flex justify-center m-10">
-				<Button className="w-[50%]" text="Login" />
-			</div>
+		<Layout className="p-0 h-[50vh] sm:h-[45vh]">
+			<form onSubmit={handleSubmit(submitHandler)}>
+				<h1 className="text-3xl md:text-4xl lg:text-5xl pt-5 font-bold text-center mb-10">
+					Login
+				</h1>
+				<div className="sm:flex sm:flex-row sm:justify-around">
+					<EmailInput register={register} errors={errors} />
+					<PasswordInput register={register} errors={errors} />
+				</div>
 
-			<div className="text-sm text-center">
-				Don&apos;t have an account? &nbsp;
-				<Link className="underline" href={`/createaccount?redirect=${redirect || "/"}`}>
-					Create an account
-				</Link>
-			</div>
-		</form>
+				<div className="flex justify-center m-10">
+					<Button className="w-[50%]" text="Login" />
+				</div>
+
+				<div className="text-sm lg:text-lg text-center">
+					<div>Don&apos;t have an account? &nbsp;</div>
+					<div>
+						<Link
+							className="underline"
+							href={`/createaccount?redirect=${redirect || "/"}`}
+						>
+							Create an account
+						</Link>
+					</div>
+				</div>
+			</form>
+		</Layout>
 	);
 };
 

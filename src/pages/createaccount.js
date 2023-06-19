@@ -10,6 +10,7 @@ import EmailInput from "@/components/Form/EmailInput";
 import PasswordInput from "@/components/Form/PasswordInput";
 import ConfirmPasswordInput from "@/components/Form/ConfirmPasswordInput";
 import FullNameInput from "@/components/Form/FullNameInput";
+import Layout from "@/components/Layout";
 
 const CreateAccountScreen = () => {
 	const { data: session } = useSession();
@@ -42,16 +43,25 @@ const CreateAccountScreen = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitHandler)}>
-			<h1 className="text-3xl font-bold text-center mb-10">Create Account</h1>
-			<FullNameInput register={register} errors={errors} />
-			<EmailInput register={register} errors={errors} />
-			<PasswordInput register={register} errors={errors} />
-			<ConfirmPasswordInput register={register} errors={errors} />
-			<div className="flex justify-center my-10">
-				<Button className="w-[50%]" text="Create Account" />
-			</div>
-		</form>
+		<Layout className="p-0 h-[60vh] lg:h-[45vh]">
+			<form onSubmit={handleSubmit(submitHandler)}>
+				<h1 className="text-3xl md:text-4xl lg:text-5xl pt-5 font-bold text-center mb-10">
+					Create Account
+				</h1>
+				<div className="lg:flex lg:flex-row lg:justify-around">
+					<FullNameInput register={register} errors={errors} />
+					<EmailInput register={register} errors={errors} />
+				</div>
+				<div className="lg:flex lg:flex-row lg:justify-around">
+					<PasswordInput register={register} errors={errors} />
+					<ConfirmPasswordInput register={register} errors={errors} />
+				</div>
+
+				<div className="flex justify-center my-10">
+					<Button className="w-[70vw] sm:w-[50vw] lg:w-[30vw]" text="Create Account" />
+				</div>
+			</form>
+		</Layout>
 	);
 };
 
