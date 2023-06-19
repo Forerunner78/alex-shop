@@ -42,7 +42,7 @@ const Header = () => {
 
 	return (
 		<header
-			className={`fixed top-0 p-5 w-[100vw] flex flex-row justify-between z-50 ${headerBackground} ${headerLimit}`}
+			className={`fixed top-0 p-5 w-[100vw] h-[10vh] flex flex-row justify-between z-50 ${headerBackground} ${headerLimit}`}
 		>
 			<section className="flex items-center">
 				<Link href="/">
