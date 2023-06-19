@@ -46,7 +46,7 @@ const Header = () => {
 		>
 			<section className="flex items-center">
 				<Link href="/">
-					<h1 className="text-center text-3xl md:text-5xl 2xl:text-7xl md:ps-10 xl:ps-[15vw] uppercase flex flex-row">
+					<h1 className="text-center text-3xl md:text-5xl lg:text-6xl 2xl:text-7xl md:ps-10 xl:ps-[15vw] uppercase flex flex-row">
 						<div className="px-2 md:px-4">Alex</div>
 						<div className="px-2 md:px-4">Shop</div>
 					</h1>
