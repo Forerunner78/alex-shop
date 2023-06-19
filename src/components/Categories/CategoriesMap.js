@@ -15,7 +15,7 @@ const CategoriesMap = () => {
 					<CategoriesCard category="Dress" image={Dress} />
 				</div>
 				<div className="relative row-span-4 md:row-span-2 col-span-1">
-					<CategoriesCard category="T-shirt" image={Tshirt} />
+					<CategoriesCard category="T-Shirt" image={Tshirt} />
 				</div>
 				<div className="relative row-span-2  ">
 					<CategoriesCard category="Pant" image={Pant} />
@@ -24,7 +24,7 @@ const CategoriesMap = () => {
 					<CategoriesCard category="Accessories" image={Accessories} />
 				</div>
 				<div className="relative row-span-2">
-					<CategoriesCard category="Shirts" image={Shirt} />
+					<CategoriesCard category="Shirt" image={Shirt} />
 				</div>
 				<div className="relative row-span-2">
 					<CategoriesCard category="Pull" image={Pull} />
