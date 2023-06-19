@@ -1,5 +1,3 @@
-import Layout from "@/components/Layout";
-import PageTitle from "@/components/PageTitle";
 import ProductItem from "@/components/ProductItem";
 import Product from "@/models/productModel";
 import db from "@/utils/db";
@@ -10,13 +8,13 @@ const SearchScreen = (props) => {
 	return (
 		<div className="flex justify-center">
 			<div className="mt-[20vh]">
-				<Layout className="mt-0 lg:mx-10 xl:w-[80vw]">
+				<div className="mt-0 mx-10 bg-slate-200 pt-10">
 					<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 						{products.map((product) => (
 							<ProductItem product={product} key={product.id} />
 						))}
 					</div>
-				</Layout>
+				</div>
 			</div>
 		</div>
 	);
