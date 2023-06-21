@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import FullNameInput from "@/components/Form/FullNameInput";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/Title/PageTitle";
 
 const ProfileScreen = () => {
 	const { data: session } = useSession();
@@ -43,28 +44,29 @@ const ProfileScreen = () => {
 		}
 	};
 	return (
-		<Layout className="p-0 h-[65vh] sm:h-[60vh] lg:h-[50vh]">
-			<form onSubmit={handleSubmit(submitHandler)}>
-				<h1 className="text-3xl md:text-4xl lg:text-5xl pt-5 font-bold text-center mb-10">
-					Update Your Profile
-				</h1>
-				<div className="lg:flex lg:flex-row lg:justify-around">
-					<FullNameInput register={register} errors={errors} />
-					<EmailInput register={register} errors={errors} />
-				</div>
-				<div className="lg:flex lg:flex-row lg:justify-around">
-					<PasswordInput register={register} errors={errors} />
-					<ConfirmPasswordInput register={register} errors={errors} />
-				</div>
+		<>
+			<Layout className="w-full mx-5 sm:mx-[15vw]">
+				<form onSubmit={handleSubmit(submitHandler)}>
+					<PageTitle title="Update Your Profile" />
 
-				<div className="flex justify-center m-10">
-					<Button
-						className="w-[100%] sm:w-[50%] h-20 sm:h-10"
-						text="Update your profile"
-					/>
-				</div>
-			</form>
-		</Layout>
+					<div className="lg:flex lg:flex-row lg:justify-around">
+						<FullNameInput register={register} errors={errors} />
+						<EmailInput register={register} errors={errors} />
+					</div>
+					<div className="lg:flex lg:flex-row lg:justify-around">
+						<PasswordInput register={register} errors={errors} />
+						<ConfirmPasswordInput register={register} errors={errors} />
+					</div>
+
+					<div className="flex justify-center m-10">
+						<Button
+							className="w-[100%] sm:w-[60%] h-20 sm:h-10"
+							text="Update your profile"
+						/>
+					</div>
+				</form>
+			</Layout>
+		</>
 	);
 };
 

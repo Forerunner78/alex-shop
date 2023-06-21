@@ -1,15 +1,13 @@
 import Image from "next/image";
 import Paypal from "./../../public/img/Paypal.png";
 import Visa from "./../../public/img/Visa.png";
+import WebsiteTitle from "./Title/WebsiteTitle";
 
 const Footer = () => {
 	return (
 		<footer className="mt-10 px-4 border-t-2 flex flex-row text-center">
 			<div className="basis-2/3 sm:basis-3/4 flex flex-col sm:flex-row items-center justify-evenly">
-				<h1 className="uppercase text-3xl md:text-5xl text-center flex flex-row">
-					<div className="px-2 md:px-4">Alex</div>
-					<div className="px-2 md:px-4">Shop</div>{" "}
-				</h1>
+				<WebsiteTitle />
 				<span className="text-xs md:px-5">Copyright &copy; {new Date().getFullYear()}</span>
 			</div>
 			<div className="basis-1/3 sm:basis-1/4 flex flex-row flex-end items-center ">

@@ -1,6 +1,7 @@
 import Button from "@/components/Buttons/ButtonComponent";
 import CheckoutWizard from "@/components/CheckoutWizard";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/Title/PageTitle";
 import { Store } from "@/utils/Store";
 import Cookies from "js-cookie";
 import Link from "next/link";
@@ -35,8 +36,8 @@ const PaymentScreen = () => {
 	return (
 		<>
 			<CheckoutWizard activeStep={2} />
-			<Layout>
-				<h1 className="text-3xl font-bold text-center mb-10">Payment Method</h1>
+			<Layout className="mb-[2vh] mt-[15vh] mx-5 sm:mb-0 w-[80vw]">
+				<PageTitle title="Payment Method" />
 				<form className="px-4" onSubmit={submitHandler}>
 					{["Paypal", "Stripe", "CashOnDelivery"].map((payment) => (
 						<div className="my-5" key={payment}>
@@ -52,20 +53,26 @@ const PaymentScreen = () => {
 							</label>
 						</div>
 					))}
-					<div className="relative flex justify-around mt-10 -mx-12 lg:mx-8">
-						<Link
-							className="w-[30vw] lg:mx-10 px-5 py-1.5 flex justify-center item-center h-10 bg-black text-white text-xl uppercase rounded-full"
-							href="/shipping"
-						>
-							Back
-						</Link>
-						<Button
-							className="w-[30vw] lg:mx-10 px-5 py-1.5 flex justify-center"
-							text="Next"
-						/>
-						{/* <Button className="min-w-25 px-5 py-1.5 h-10 bg-black text-white text-xl uppercase rounded-full">
-							Next &gt;
-						</Button> */}
+					<div className="relative ">
+						<div className="absolute top-10 flex justify-around w-full">
+							<Link
+								className="w-[30vw] lg:mx-10 px-5 py-1.5 flex justify-center item-center h-10 bg-black text-white text-xl uppercase rounded-full"
+								href="/shipping"
+							>
+								Back
+							</Link>
+							<Button
+								className="w-[30vw] lg:mx-10 px-5 py-1.5 flex justify-center"
+								text="Next"
+							/>
+						</div>
+
+						{/* <div className="relative flex justify-center w-full">
+							<Button
+								className="absolute sm:-left-[35%] -bottom-[9vh] sm:-bottom-[130%] w-full xs:w-[70%]"
+								text="Next"
+							/>
+						</div> */}
 					</div>
 				</form>
 			</Layout>

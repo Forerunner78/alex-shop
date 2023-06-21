@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
 import "../../dist/output.css";
+import Loading from "@/components/Loading";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -27,9 +28,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 					<StoreProvider>
 						<PayPalScriptProvider deferLoading={true}>
 							<ToastContainer limit={1} />
-							<main className="w-[100vw] relative">
+							<main className="w-[100vw] min-h-[100vh] relative">
 								<Header />
-								<section className="w-full min-h-[76vh] ">
+								<section className="w-full min-h-[89vh] sm:min-h-[89vh] md:min-h-[88vh] lg:min-h-[85vh] xl:lg:min-h-[84vh] flex justify-center items-center">
 									{Component.auth ? (
 										<Auth>
 											<Component {...pageProps} />
@@ -59,7 +60,7 @@ function Auth({ children }) {
 		},
 	});
 	if (status === "loading") {
-		return <div>Loading...</div>;
+		return <Loading />;
 	}
 	return children;
 }

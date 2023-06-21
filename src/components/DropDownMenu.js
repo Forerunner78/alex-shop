@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { CgProfile } from "react-icons/cg";
+import Loading from "./Loading";
 
 const DropDownMenu = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ const DropDownMenu = () => {
 			{isOpen ? (
 				<div className="min-w-[10vw] flex flex-col justify-between z-30 items-center absolute top-[50vh] left-[50vw] -translate-x-1/2 -translate-y-1/2 bg-black text-white rounded-lg backdrop-blur-md py-30">
 					{status === "loading" ? (
-						"Loading"
+						<Loading />
 					) : session?.user ? (
 						<div>
 							<div className="flex justify-end">
