@@ -21,12 +21,12 @@ const ProductItem = ({ product }) => {
 
 			<div className="leading-9 px-2 w-[90%]">
 				<Link href={`/product/${product.id}`}>
-					<h1 className="uppercase font-bold h-20 flex items-center justify-center break-normal">
+					<h1 className="uppercase font-bold h-20 flex items-center justify-center break-normal text-xl lg:text-2xl">
 						{product.name}
 					</h1>
 				</Link>
 				<Rating value={product.rating} numReview={product.numReviews} />
-				<h3 className="underline m-2 font-bold">{`${product.price} €`}</h3>
+				<h3 className="underline m-2 font-bold text-xl py-4">{`${product.price} €`}</h3>
 				<AddToCartButton product={product} className="p-1 w-ful" />
 			</div>
 		</div>

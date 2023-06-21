@@ -1,4 +1,7 @@
+import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import OrderSummary from "@/components/OrderSummary";
+import PageTitle from "@/components/Title/PageTitle";
 import PaymentMethod from "@/components/PaymentMethod";
 import ShippingAddress from "@/components/ShippingAddress";
 import { getError } from "@/utils/error";
@@ -110,106 +113,112 @@ const OrderScreen = () => {
 	};
 
 	return (
-		<>
-			<h1 className="text-center font-bold">{`ORDER ${orderId}`}</h1>
+		<div className="flex flex-col">
 			{loading ? (
-				<div>Loading...</div>
+				<Loading />
 			) : error ? (
 				<div>{error}</div>
 			) : (
-				<div>
+				<Layout className="mb-[2vh] mt-[20vh] mx-5 sm:mb-0 w-[80vw]">
 					<div className="px-4">
-						<div className="border-2 my-5 p-4">
-							<ShippingAddress shippingAddress={shippingAddress} />
-							{isDelivered ? (
-								<div className="bg-green-200 text-green-600 rounded-full m-3 p-2">
-									Delivered on {deliveredAt}
+						<PageTitle title="Order Summary" />
+						<p className="mb-5">{`Order ${orderId.slice(0, 10)}`}</p>
+						<div className="md:flex md:flex-row md:justify-around">
+							<div className="border-2 bg-slate-400 my-5 p-4 md:w-[45%] flex flex-col">
+								<ShippingAddress shippingAddress={shippingAddress} />
+								<div className="mt-5 md:mt-5">
+									{isDelivered ? (
+										<div className="bg-green-200 text-green-600 rounded-full m-3 p-2 text-center md:w-[15vw]">
+											Delivered on {deliveredAt}
+										</div>
+									) : (
+										<div className="bg-red-200 text-red-600 rounded-full m-3 p-2 text-center md:w-[15vw]">
+											Not delivered
+										</div>
+									)}
 								</div>
-							) : (
-								<div className="bg-red-200 text-red-600 rounded-full m-3 p-2">
-									Not delivered
-								</div>
-							)}
-						</div>
-						<div className="border-2 my-5 p-4">
-							<PaymentMethod paymentMethod={paymentMethod} />
-							{isPaid ? (
-								<div className="bg-green-200 text-green-600 rounded-full m-3 p-2">
-									{paidAt}
-								</div>
-							) : (
-								<div className="bg-red-200 text-red-600 rounded-full m-3 p-2">
-									Not paid
-								</div>
-							)}
-						</div>
-						<div className="border-2 my-5">
-							<h2 className="text-lg font-bold uppercase mb-2 px-4 pt-4">
-								Order Items
-							</h2>
-							<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-								<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
-									<div className="overflow-hidden"></div>
-									<table className="min-w-full text-center text-sm font-light">
-										<thead className="border-b font-medium">
-											<tr>
-												<th scope="col" className="px-3 py-4">
-													Item
-												</th>
-												<th scope="col" className="px-3 py-4">
-													Quantity
-												</th>
-												<th scope="col" className="px-3 py-4">
-													Price
-												</th>
-												<th scope="col" className="px-3 py-4">
-													Subtotal
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-											{orderItems.map((item) => (
-												<tr key={item.id} className="border-t">
-													<td className="whitespace-nowrap px-3 py-4 font-medium">
-														<Link href={`/product/${item.id}`}>
-															<Image
-																src={item.image}
-																alt={item.name}
-																width={50}
-																height={50}
-															></Image>
-														</Link>
-													</td>
-													<td className="whitespace-nowrap px-3 py-4">
-														{item.quantity}
-													</td>
-													<td className="whitespace-nowrap px-3 py-4">{`${item.price} €`}</td>
-													<td className="whitespace-nowrap px-3 py-4">{`${(
-														Math.round(
-															item.price * item.quantity * 100
-														) / 100
-													).toFixed(2)} €`}</td>
-												</tr>
-											))}
-										</tbody>
-									</table>
+							</div>
+							<div className="border-2 bg-slate-400 my-5 p-4 md:w-[45%] flex flex-col">
+								<PaymentMethod paymentMethod={paymentMethod} />
+								<div className="mt-5 md:mt-auto">
+									{isPaid ? (
+										<div className="bg-green-200 text-green-600 rounded-full m-3 p-2 text-center md:w-[15vw]">
+											{paidAt}
+										</div>
+									) : (
+										<div className="bg-red-200 text-red-600 rounded-full m-3 p-2 text-center md:w-[15vw]">
+											Not paid
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
-						<div className="border-2 my-5 p-4">
-							<OrderSummary
-								itemsPrice={itemsPrice}
-								taxPrice={taxPrice}
-								shippingPrice={shippingPrice}
-								totalPrice={totalPrice}
-							/>
+						<div className="border-2 bg-slate-400 my-5 md:mx-4">
+							<h2 className="text-xl md:text-2xl font-bold uppercase mb-2 px-4 pt-4">
+								Order Items
+							</h2>
+							<div className="overflow-x-auto sm:mx-6 lg:-mx-8">
+								<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8 overflow-x-auto">
+									<div className="overflow-hidden flex justify-center">
+										<table className="w-[90%] text-center text-sm font-light">
+											<thead>
+												<tr className="md:text-xl">
+													<th scope="col" className="px-3 py-4">
+														Item
+													</th>
+													<th scope="col" className="px-3 py-4">
+														Quantity
+													</th>
+													<th scope="col" className="px-3 py-4">
+														Price
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												{orderItems.map((item) => (
+													<tr key={item._id} className="border-t">
+														<td className="relative whitespace-nowrap px-3 my-2 font-medium flex justify-center h-[10vh] md:h-[15vh] lg:h-[30vh] ">
+															<Link href={`/product/${item.id}`}>
+																<Image
+																	src={item.image}
+																	alt={item.name}
+																	fill
+																	className="object-contain"
+																></Image>
+															</Link>
+														</td>
+														<td className="whitespace-nowrap px-3 md:text-lg">
+															<p className="bg-slate-400">
+																{item.quantity}
+															</p>
+														</td>
+														<td className="whitespace-nowrap px-3 md:text-lg">
+															{item.price} €
+														</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="md:flex md:justify-end">
+							<div className="border-2 bg-slate-400 my-5 p-4 md:mx-4 md:w-[50%] xl:w-[30%]">
+								<OrderSummary
+									itemsPrice={itemsPrice}
+									taxPrice={taxPrice}
+									shippingPrice={shippingPrice}
+									totalPrice={totalPrice}
+								/>
+							</div>
 						</div>
 						{!isPaid && (
 							<>
 								{isPending ? (
-									<div>Loading...</div>
+									<Loading />
 								) : (
-									<div className="mt-10">
+									<div className="mt-10 md:w-[50vw] mx-auto">
 										<PayPalButtons
 											createOrder={createOrder}
 											onApprove={onApprove}
@@ -217,13 +226,13 @@ const OrderScreen = () => {
 										></PayPalButtons>
 									</div>
 								)}
-								{loadingPay && <div>Loading...</div>}
+								{loadingPay && <Loading />}
 							</>
 						)}
 					</div>
-				</div>
+				</Layout>
 			)}
-		</>
+		</div>
 	);
 };
 

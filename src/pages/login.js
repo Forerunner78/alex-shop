@@ -9,6 +9,7 @@ import Button from "@/components/Buttons/ButtonComponent";
 import EmailInput from "@/components/Form/EmailInput";
 import PasswordInput from "@/components/Form/PasswordInput";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/Title/PageTitle";
 
 const LoginScreen = () => {
 	const { data: session } = useSession();
@@ -39,11 +40,9 @@ const LoginScreen = () => {
 	};
 
 	return (
-		<Layout className="p-0 h-[50vh] sm:h-[45vh]">
+		<Layout className="w-full mx-5 sm:mx-[15vw] pb-5">
 			<form onSubmit={handleSubmit(submitHandler)}>
-				<h1 className="text-3xl md:text-4xl lg:text-5xl pt-5 font-bold text-center mb-10">
-					Login
-				</h1>
+				<PageTitle title="Login" />
 				<div className="sm:flex sm:flex-row sm:justify-around">
 					<EmailInput register={register} errors={errors} />
 					<PasswordInput register={register} errors={errors} />

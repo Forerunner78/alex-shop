@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import CityInput from "@/components/Form/CityInput";
 import CountryInput from "@/components/Form/CountryInput";
 import Layout from "@/components/Layout";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/Title/PageTitle";
 
 const ShippingScreen = () => {
 	const {
@@ -51,7 +51,7 @@ const ShippingScreen = () => {
 	return (
 		<>
 			<CheckoutWizard activeStep={1} />
-			<Layout className="mb-[15vh]">
+			<Layout className="mb-[2vh] mt-[15vh] mx-5 sm:mb-0 w-[80vw]">
 				<PageTitle title="Your Shipping Address" />
 				<form
 					className="grid grid-cols-1 sm:grid-cols-2"
@@ -62,9 +62,9 @@ const ShippingScreen = () => {
 					<CityInput register={register} errors={errors} />
 					<PostalCodeInput register={register} errors={errors} />
 					<CountryInput register={register} errors={errors} />
-					<div className="relative">
+					<div className="relative flex justify-center w-full">
 						<Button
-							className="absolute sm:-left-[50%] -bottom-[17vh] sm:-bottom-[130%] w-full"
+							className="absolute sm:-left-[35%] -bottom-[9vh] sm:-bottom-[130%] w-full xs:w-[70%]"
 							text="Next"
 						/>
 					</div>

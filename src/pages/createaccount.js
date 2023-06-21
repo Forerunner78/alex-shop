@@ -43,7 +43,7 @@ const CreateAccountScreen = () => {
 	};
 
 	return (
-		<Layout className="p-0 h-[60vh] lg:h-[45vh]">
+		<Layout className="w-full mx-5 sm:mx-[15vw] pb-5">
 			<form onSubmit={handleSubmit(submitHandler)}>
 				<h1 className="text-3xl md:text-4xl lg:text-5xl pt-5 font-bold text-center mb-10">
 					Create Account

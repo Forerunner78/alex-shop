@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { EmptyCart } from "@/components/EmptyCart";
 import Layout from "@/components/Layout";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/Title/PageTitle";
 
 const CartScreen = () => {
 	const { state, dispatch } = useContext(Store);
@@ -33,18 +33,18 @@ const CartScreen = () => {
 	};
 
 	return (
-		<Layout>
+		<Layout className="w-full mx-5 sm:mx-[15vw] pb-5 lg:mt-[15vh]">
 			<PageTitle title="Your Shopping Cart" />
 			{cartItems.length === 0 ? (
 				<EmptyCart />
 			) : (
-				<div className="flex flex-col">
-					<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-						<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8">
-							<div className="overflow-hidden">
-								<table className="min-w-full text-center text-sm font-light">
+				<>
+					<div className="overflow-x-auto sm:mx-6 lg:-mx-8">
+						<div className="inline-block min-w-full py-2 sm:px-3 lg:px-8 overflow-x-auto">
+							<div className="overflow-hidden flex justify-center">
+								<table className="w-[90%] text-center text-sm font-light">
 									<thead className="font-medium">
-										<tr className="md:text-xl">
+										<tr className="md:text-xl ">
 											<th scope="col" className="px-3 py-4">
 												Item
 											</th>
@@ -65,8 +65,8 @@ const CartScreen = () => {
 												key={item._id}
 												className="border-b-black border-t-black border-2 md:text-lg"
 											>
-												<td className="relative whitespace-nowrap px-3 py-4 my-5 font-medium flex justify-center h-[20vh] md:h-[30vh]">
-													<Link href={`/product/${item.id}`} className="">
+												<td className="relative whitespace-nowrap px-3 my-2 font-medium flex justify-center h-[10vh] md:h-[15vh] lg:h-[30vh] ">
+													<Link href={`/product/${item.id}`}>
 														<Image
 															src={item.image}
 															alt={item.name}
@@ -75,7 +75,7 @@ const CartScreen = () => {
 														/>
 													</Link>
 												</td>
-												<td className="whitespace-nowrap px-3 py-4">
+												<td className="whitespace-nowrap px-3">
 													<select
 														value={item.quantity}
 														className="bg-slate-200 w-9"
@@ -92,10 +92,10 @@ const CartScreen = () => {
 														)}
 													</select>
 												</td>
-												<td className="whitespace-nowrap px-3 py-4">
+												<td className="whitespace-nowrap px-3">
 													{item.price} €
 												</td>
-												<td className="whitespace-nowrap px-3 py-4">
+												<td className="whitespace-nowrap px-3">
 													<button onClick={() => removeItemHandler(item)}>
 														<HiOutlineTrash />
 													</button>
@@ -105,25 +105,28 @@ const CartScreen = () => {
 									</tbody>
 								</table>
 							</div>
+							<div className="flex justify-end me-5 md:me-10 lg:me-[5vw]">
+								<div className="flex flex-col text-lg md:text-xl font-bold mt-5">
+									<div className="my-5">
+										Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :{" "}
+										{cartItems
+											.reduce((a, c) => a + c.quantity * c.price, 0)
+											.toFixed(2)}{" "}
+										€
+									</div>
+									<div className="flex justify-center">
+										<button
+											className=" w-full h-10 bg-black text-white text-xl uppercase rounded-full"
+											onClick={() => router.push("login?redirect=/shipping")}
+										>
+											Check Out
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div className="flex justify-end me-5">
-						<div className="flex flex-col text-lg font-bold mt-5">
-							<div className="my-5">
-								Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :{" "}
-								{cartItems.reduce((a, c) => a + c.quantity * c.price, 0)} €
-							</div>
-							<div className="flex justify-center">
-								<button
-									className=" w-full h-10 bg-black text-white text-xl uppercase rounded-full"
-									onClick={() => router.push("login?redirect=/shipping")}
-								>
-									Check Out
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				</>
 			)}
 		</Layout>
 	);
