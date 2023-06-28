@@ -39,7 +39,7 @@ const Carousel = ({ products }) => {
 						<CarouselCard image={image2} text="Discover the best sales" />
 					</div>
 					<div className="relative w-[100vw]">
-						<CarouselCard image={image3} text="Uncover the latest trends" query="all" />
+						<CarouselCard image={image3} text="Uncover the latest trends" query="All" />
 					</div>
 				</div>
 			</div>
