@@ -5,13 +5,25 @@ import PriceRefinements from "@/components/Refinements/PriceRefinements";
 import SortRefinements from "@/components/Refinements/SortRefinements";
 import Product from "@/models/productModel";
 import db from "@/utils/db";
-import { useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { useState, Fragment, useEffect } from "react";
+import { BiFilterAlt } from "react-icons/bi";
 
 const SearchScreen = (props) => {
 	const { allCategories, products } = props;
 	const [selectedCategories, setSelectedCategories] = useState([]);
 	const [selectedPriceRange, setSelectedPriceRange] = useState([]);
 	const [selectedSortOption, setSelectedSortOption] = useState("");
+	const [selectedProducts, setSelectedProducts] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
+
+	function closeModal() {
+		setIsOpen(false);
+	}
+
+	function openModal() {
+		setIsOpen(true);
+	}
 
 	const handleSelectedCategories = (e) => {
 		setSelectedCategories(e);
@@ -60,9 +72,12 @@ const SearchScreen = (props) => {
 				});
 				break;
 		}
-
-		return filtered;
+		setSelectedProducts(filtered);
 	};
+
+	useEffect(() => {
+		filteredProducts(products);
+	}, [selectedCategories, selectedPriceRange, selectedSortOption]);
 
 	const handleSelectedPriceRange = (e) => {
 		setSelectedPriceRange(e);
@@ -73,19 +88,99 @@ const SearchScreen = (props) => {
 	};
 	return (
 		<div className="flex justify-center">
-			<div className="mt-[10vh]">
-				<div className="m-[10vh]">
-					<CategoryRefinements
-						categories={allCategories}
-						handleSelectedCategories={handleSelectedCategories}
-					/>
-					<PriceRefinements handleSelectedPriceRange={handleSelectedPriceRange} />
-					<SortRefinements handleSelectedSort={handleSelectedSort} />
+			<div className="mt-[10vh] w-[80vw]">
+				<div>
+					<div className="hidden">
+						<CategoryRefinements
+							categories={allCategories}
+							handleSelectedCategories={handleSelectedCategories}
+						/>
+						<PriceRefinements handleSelectedPriceRange={handleSelectedPriceRange} />
+						<SortRefinements handleSelectedSort={handleSelectedSort} />
+					</div>
+
+					<div className="flex flex-row items-center justify-center md:mt-[5vh]">
+						<button
+							type="button"
+							onClick={openModal}
+							className="rounded-md bg-black bg-opacity-20 px-4 py-2 my-5 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+						>
+							<div className="flex flex-row text-lg items-center">
+								<span className="font-bold me-2">Filter your products</span>{" "}
+								<BiFilterAlt />
+							</div>
+						</button>
+					</div>
+					<Transition appear show={isOpen} as={Fragment}>
+						<Dialog as="div" className="relative z-10" onClose={closeModal}>
+							<Transition.Child
+								as={Fragment}
+								enter="ease-out duration-300"
+								enterFrom="opacity-0"
+								enterTo="opacity-100"
+								leave="ease-in duration-200"
+								leaveFrom="opacity-100"
+								leaveTo="opacity-0"
+							>
+								<div className="fixed inset-0 bg-black bg-opacity-25" />
+							</Transition.Child>
+
+							<div className="fixed inset-0 overflow-y-auto">
+								<div className="flex min-h-full items-center justify-center p-4 text-center">
+									<Transition.Child
+										as={Fragment}
+										enter="ease-out duration-300"
+										enterFrom="opacity-0 scale-95"
+										enterTo="opacity-100 scale-100"
+										leave="ease-in duration-200"
+										leaveFrom="opacity-100 scale-100"
+										leaveTo="opacity-0 scale-95"
+									>
+										<Dialog.Panel className="w-[100vw] max-w-md max-h-[80vh] transform overflow-auto rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all relative">
+											<Dialog.Title
+												as="h3"
+												className="text-lg font-medium leading-6 text-gray-900"
+											>
+												Filter options
+											</Dialog.Title>
+											<div className="absolute top-5 right-5">
+												<button
+													type="button"
+													className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+													onClick={closeModal}
+												>
+													X
+												</button>
+											</div>
+											<div className="w-full px-4 pt-10">
+												<div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
+													<CategoryRefinements
+														categories={allCategories}
+														handleSelectedCategories={
+															handleSelectedCategories
+														}
+													/>
+													<PriceRefinements
+														handleSelectedPriceRange={
+															handleSelectedPriceRange
+														}
+													/>
+													<SortRefinements
+														handleSelectedSort={handleSelectedSort}
+													/>
+												</div>
+											</div>
+										</Dialog.Panel>
+									</Transition.Child>
+								</div>
+							</div>
+						</Dialog>
+					</Transition>
 				</div>
-				<div className="mt-0 mx-10 bg-slate-200 pt-10">
-					{filteredProducts(products).length > 0 ? (
-						<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-							{filteredProducts(products).map((product) => (
+				<div className="mt-0 md:mx-10 bg-slate-200 pt-10 flex justify-center">
+					{selectedProducts.length > 0 ? (
+						<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
+							{selectedProducts.map((product) => (
 								<ProductItem product={product} key={product.id} />
 							))}
 						</div>
@@ -100,10 +195,8 @@ const SearchScreen = (props) => {
 
 export default SearchScreen;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
 	await db.connect();
-	const { params } = context;
-	const { category } = params;
 
 	const allProducts = await Product.find().lean();
 
@@ -117,29 +210,7 @@ export async function getServerSideProps(context) {
 		return allCategories;
 	};
 
-	var products;
-
-	if (category === "All" || !category) {
-		products = allProducts;
-	} else {
-		products = await Product.find({ category }).lean();
-	}
-
-	// if (query.minPrice) {
-	// 	const minPrice = parseInt(query.minPrice);
-	// 	products = products.filter((product) => product.price >= minPrice);
-	// }
-
-	// if (query.maxPrice) {
-	// 	const maxPrice = parseInt(query.maxPrice);
-	// 	products = products.filter((product) => product.price <= maxPrice);
-	// }
-
-	// if (query.sortOrder === "ascending") {
-	// 	products = products.sort((a, b) => a.price - b.price);
-	// } else if (query.sortOrder === "descending") {
-	// 	products = products.sort((a, b) => b.price - a.price);
-	// }
+	const products = allProducts;
 
 	await db.disconnect();
 	return {
