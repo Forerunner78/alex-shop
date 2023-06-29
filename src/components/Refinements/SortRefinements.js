@@ -1,7 +1,6 @@
-import { Listbox, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
-import { BsChevronDown } from "react-icons/bs";
-import { BsCheck } from "react-icons/bs";
+import { Disclosure } from "@headlessui/react";
+import { useEffect, useState } from "react";
+import { BsChevronUp } from "react-icons/bs";
 
 const sortOptions = [
 	{ id: 1, name: "Price: Low to High" },
@@ -15,61 +14,45 @@ const sortOptions = [
 const SortRefinements = ({ handleSelectedSort }) => {
 	const [selectedSortOption, setSelectedSortOption] = useState(sortOptions[0]);
 
+	const handleChecked = (optionId) => {
+		return selectedSortOption.id === optionId;
+	};
+
 	useEffect(() => {
 		handleSelectedSort(selectedSortOption);
 	}, [selectedSortOption]);
 
 	return (
-		<div className="fixed top-16 w-72">
-			<Listbox value={selectedSortOption} onChange={setSelectedSortOption}>
-				<div className="relative mt-1">
-					<Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-						<span className="block truncate">{selectedSortOption.name}</span>
-						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-							<BsChevronDown />
-						</span>
-					</Listbox.Button>
-					<Transition
-						as={Fragment}
-						leave="transition ease-in duration-100"
-						leaveFrom="opacity-100"
-						leaveTo="opacity-0"
-					>
-						<Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-							{sortOptions.map((option, optionId) => (
-								<Listbox.Option
-									key={optionId}
-									className={({ active }) =>
-										`relative cursor-default select-none py-2 pl-10 pr-4 ${
-											active ? "bg-amber-100 text-amber-900" : "text-gray-900"
-										}`
-									}
-									value={option}
-								>
-									{({ active }) => (
-										<>
-											<span
-												className={`block truncate ${
-													active ? "font-2xl" : "font-normal"
-												}`}
-											>
-												{option.name}
-											</span>
-
-											{active ? (
-												<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-													<BsCheck />
-												</span>
-											) : null}
-										</>
-									)}
-								</Listbox.Option>
-							))}
-						</Listbox.Options>
-					</Transition>
-				</div>
-			</Listbox>
-		</div>
+		<Disclosure as="div" className="mt-2">
+			{({ open }) => (
+				<>
+					<Disclosure.Button className="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+						<span>Sort</span>
+						<BsChevronUp
+							className={`${
+								open ? "rotate-180 transform" : ""
+							} h-5 w-5 text-blue-500`}
+						/>
+					</Disclosure.Button>
+					<Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+						{sortOptions.map((option) => (
+							<div className="my-5" key={option}>
+								<input
+									name={option.name}
+									id={option.id}
+									type="checkbox"
+									checked={handleChecked(option.id)}
+									onChange={() => setSelectedSortOption(option)}
+								/>
+								<label className="ms-2 mb-2 text-sm sm:text-lg" htmlFor={option}>
+									{option.name}
+								</label>
+							</div>
+						))}
+					</Disclosure.Panel>
+				</>
+			)}
+		</Disclosure>
 	);
 };
 
