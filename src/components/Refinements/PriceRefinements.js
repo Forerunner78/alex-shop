@@ -23,54 +23,65 @@ const PriceRefinements = ({ handleSelectedPriceRange }) => {
 		handleSelectedPriceRange(range);
 	}, [range]);
 
+	const priceFilterOptions = () => {
+		return (
+			<div className="flex flex-row items-center justify-evenly my-5">
+				<div className="flex flex-col text-center text-sm sm:text-lg lg:text-base mx-1">
+					<label className="mb-2" htmlFor="minPrice">
+						Min
+					</label>
+					<label className="mt-2" htmlFor="maxPrice">
+						Max
+					</label>
+				</div>
+				<div className="flex flex-col w-[40vw] text-sm sm:text-lg lg:text-base mx-1">
+					<input
+						id="minPrice"
+						type="number"
+						value={minPrice}
+						className="rounded border-2 text-center mb-2 lg:w-[14vw]"
+						placeholder="Minimum Price"
+						onChange={handleMinPriceChange}
+					/>
+					<input
+						id="maxPrice"
+						type="number"
+						value={maxPrice}
+						className="rounded border-2 text-center mt-2 lg:w-[14vw]"
+						placeholder="Maximum Price"
+						onChange={handleMaxPriceChange}
+					/>
+				</div>
+			</div>
+		);
+	};
+
 	return (
-		<Disclosure as="div" className="mt-2">
-			{({ open }) => (
-				<>
-					<Disclosure.Button className="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
-						<span>Price</span>
-						<BsChevronUp
-							className={`${
-								open ? "rotate-180 transform" : ""
-							} h-5 w-5 text-blue-500`}
-						/>
-					</Disclosure.Button>
-					<Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-						<div className="flex flex-row items-center">
-							<div className="flex flex-col me-2">
-								<label
-									className=" text-sm sm:text-lg text-left mb-2"
-									htmlFor="minPrice"
-								>
-									Min
-								</label>
-								<label className=" text-sm sm:text-lg text-left" htmlFor="maxPrice">
-									Max
-								</label>
-							</div>
-							<div className="flex flex-col max-w-[60%]">
-								<input
-									id="minPrice"
-									type="number"
-									value={minPrice}
-									className="rounded border-2 px-2 text-center mb-2"
-									placeholder="Minimum Price"
-									onChange={handleMinPriceChange}
+		<>
+			<div className="lg:hidden">
+				<Disclosure as="div">
+					{({ open }) => (
+						<>
+							<Disclosure.Button className="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 my-5 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
+								<h2 className="text-lg">Price</h2>
+								<BsChevronUp
+									className={`${
+										open ? "rotate-180 transform" : ""
+									} h-5 w-5 text-blue-500`}
 								/>
-								<input
-									id="maxPrice"
-									type="number"
-									value={maxPrice}
-									className="rounded border-2 px-2 text-center"
-									placeholder="Maximum Price"
-									onChange={handleMaxPriceChange}
-								/>
-							</div>
-						</div>
-					</Disclosure.Panel>
-				</>
-			)}
-		</Disclosure>
+							</Disclosure.Button>
+							<Disclosure.Panel className="p-2 text-sm">
+								{priceFilterOptions()}
+							</Disclosure.Panel>
+						</>
+					)}
+				</Disclosure>
+			</div>
+			<div className="hidden lg:block my-[7vh]">
+				<h2 className="text-xl font-bold text-blue-500">Price</h2>
+				{priceFilterOptions()}
+			</div>
+		</>
 	);
 };
 

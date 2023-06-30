@@ -1,3 +1,5 @@
+import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import ProductItem from "@/components/ProductItem";
 import ProductNotFound from "@/components/ProductNotFound";
 import CategoryRefinements from "@/components/Refinements/CategoryRefinements";
@@ -16,6 +18,7 @@ const SearchScreen = (props) => {
 	const [selectedSortOption, setSelectedSortOption] = useState("");
 	const [selectedProducts, setSelectedProducts] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	function closeModal() {
 		setIsOpen(false);
@@ -30,6 +33,7 @@ const SearchScreen = (props) => {
 	};
 
 	const filteredProducts = (products) => {
+		setIsLoading(true);
 		let filtered = products;
 		if (selectedCategories.includes("All")) {
 			filtered = filtered.filter(
@@ -72,6 +76,7 @@ const SearchScreen = (props) => {
 				});
 				break;
 		}
+		setIsLoading(false);
 		setSelectedProducts(filtered);
 	};
 
@@ -88,106 +93,114 @@ const SearchScreen = (props) => {
 	};
 	return (
 		<div className="flex justify-center">
-			<div className="mt-[10vh] w-[80vw]">
-				<div>
-					<div className="hidden">
-						<CategoryRefinements
-							categories={allCategories}
-							handleSelectedCategories={handleSelectedCategories}
-						/>
-						<PriceRefinements handleSelectedPriceRange={handleSelectedPriceRange} />
-						<SortRefinements handleSelectedSort={handleSelectedSort} />
+			<div className="mt-[10vh] lg:mt-[20vh] w-[80vw] lg:w-[95vw] lg:flex lg:flex-row">
+				<div className="lg:flex-auto">
+					<div className="hidden lg:block lg:w-[20vw]">
+						<Layout className="lg:rounded-2xl p-5">
+							<h1 className="text-2xl text-center font-bold mb-10">Filter options</h1>
+							<CategoryRefinements
+								categories={allCategories}
+								handleSelectedCategories={handleSelectedCategories}
+							/>
+							<PriceRefinements handleSelectedPriceRange={handleSelectedPriceRange} />
+							<SortRefinements handleSelectedSort={handleSelectedSort} />
+						</Layout>
 					</div>
-
-					<div className="flex flex-row items-center justify-center md:mt-[5vh]">
-						<button
-							type="button"
-							onClick={openModal}
-							className="rounded-md bg-black bg-opacity-20 px-4 py-2 my-5 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-						>
-							<div className="flex flex-row text-lg items-center">
-								<span className="font-bold me-2">Filter your products</span>{" "}
-								<BiFilterAlt />
-							</div>
-						</button>
-					</div>
-					<Transition appear show={isOpen} as={Fragment}>
-						<Dialog as="div" className="relative z-10" onClose={closeModal}>
-							<Transition.Child
-								as={Fragment}
-								enter="ease-out duration-300"
-								enterFrom="opacity-0"
-								enterTo="opacity-100"
-								leave="ease-in duration-200"
-								leaveFrom="opacity-100"
-								leaveTo="opacity-0"
+					<div className="lg:hidden">
+						<div className="flex flex-row items-center justify-center md:mt-[5vh]">
+							<button
+								type="button"
+								onClick={openModal}
+								className="rounded-md bg-black bg-opacity-20 px-4 py-2 my-5 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
 							>
-								<div className="fixed inset-0 bg-black bg-opacity-25" />
-							</Transition.Child>
-
-							<div className="fixed inset-0 overflow-y-auto">
-								<div className="flex min-h-full items-center justify-center p-4 text-center">
-									<Transition.Child
-										as={Fragment}
-										enter="ease-out duration-300"
-										enterFrom="opacity-0 scale-95"
-										enterTo="opacity-100 scale-100"
-										leave="ease-in duration-200"
-										leaveFrom="opacity-100 scale-100"
-										leaveTo="opacity-0 scale-95"
-									>
-										<Dialog.Panel className="w-[100vw] max-w-md max-h-[80vh] transform overflow-auto rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all relative">
-											<Dialog.Title
-												as="h3"
-												className="text-lg font-medium leading-6 text-gray-900"
-											>
-												Filter options
-											</Dialog.Title>
-											<div className="absolute top-5 right-5">
-												<button
-													type="button"
-													className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-													onClick={closeModal}
-												>
-													X
-												</button>
-											</div>
-											<div className="w-full px-4 pt-10">
-												<div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
-													<CategoryRefinements
-														categories={allCategories}
-														handleSelectedCategories={
-															handleSelectedCategories
-														}
-													/>
-													<PriceRefinements
-														handleSelectedPriceRange={
-															handleSelectedPriceRange
-														}
-													/>
-													<SortRefinements
-														handleSelectedSort={handleSelectedSort}
-													/>
-												</div>
-											</div>
-										</Dialog.Panel>
-									</Transition.Child>
+								<div className="flex flex-row text-lg items-center">
+									<span className="font-bold me-2">Filter your products</span>{" "}
+									<BiFilterAlt />
 								</div>
-							</div>
-						</Dialog>
-					</Transition>
-				</div>
-				<div className="mt-0 md:mx-10 bg-slate-200 pt-10 flex justify-center">
-					{selectedProducts.length > 0 ? (
-						<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
-							{selectedProducts.map((product) => (
-								<ProductItem product={product} key={product.id} />
-							))}
+							</button>
 						</div>
-					) : (
-						<ProductNotFound />
-					)}
+						<Transition appear show={isOpen} as={Fragment}>
+							<Dialog as="div" className="relative z-10" onClose={closeModal}>
+								<Transition.Child
+									as={Fragment}
+									enter="ease-out duration-300"
+									enterFrom="opacity-0"
+									enterTo="opacity-100"
+									leave="ease-in duration-200"
+									leaveFrom="opacity-100"
+									leaveTo="opacity-0"
+								>
+									<div className="fixed inset-0 bg-black bg-opacity-25" />
+								</Transition.Child>
+
+								<div className="fixed inset-0 overflow-y-auto">
+									<div className="flex min-h-full items-center justify-center p-4 text-center">
+										<Transition.Child
+											as={Fragment}
+											enter="ease-out duration-300"
+											enterFrom="opacity-0 scale-95"
+											enterTo="opacity-100 scale-100"
+											leave="ease-in duration-200"
+											leaveFrom="opacity-100 scale-100"
+											leaveTo="opacity-0 scale-95"
+										>
+											<Dialog.Panel className="w-[100vw] max-w-md max-h-[80vh] transform overflow-auto rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all relative">
+												<Dialog.Title
+													as="h3"
+													className="text-lg font-medium leading-6 text-gray-900"
+												>
+													Filter options
+												</Dialog.Title>
+												<div className="absolute top-5 right-5">
+													<button
+														type="button"
+														className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+														onClick={closeModal}
+													>
+														X
+													</button>
+												</div>
+												<div className="w-full px-4 pt-10">
+													<div className="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
+														<CategoryRefinements
+															categories={allCategories}
+															handleSelectedCategories={
+																handleSelectedCategories
+															}
+														/>
+														<PriceRefinements
+															handleSelectedPriceRange={
+																handleSelectedPriceRange
+															}
+														/>
+														<SortRefinements
+															handleSelectedSort={handleSelectedSort}
+														/>
+													</div>
+												</div>
+											</Dialog.Panel>
+										</Transition.Child>
+									</div>
+								</div>
+							</Dialog>
+						</Transition>
+					</div>
 				</div>
+				<Layout className="mt-0 md:mx-10 bg-slate-200 py-10 flex justify-center items-center lg:min-w-[70vw]">
+					<div>
+						{isLoading ? (
+							<Loading />
+						) : selectedProducts.length > 0 ? (
+							<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
+								{selectedProducts.map((product) => (
+									<ProductItem product={product} key={product.id} />
+								))}
+							</div>
+						) : (
+							<ProductNotFound />
+						)}
+					</div>
+				</Layout>
 			</div>
 		</div>
 	);

@@ -32,37 +32,49 @@ const CategoryRefinements = ({ categories, handleSelectedCategories }) => {
 		handleSelectedCategories(selectedCategories);
 	}, [selectedCategories]);
 
+	const categoriesFilterOptions = () => {
+		return categories.map((category) => (
+			<div className="my-5" key={category}>
+				<input
+					name="category"
+					id={category}
+					type="checkbox"
+					checked={handleChecked(category)}
+					onChange={() => handleSelectedCategory(category)}
+				/>
+				<label className="ms-2 mb-2 text-sm sm:text-lg lg:text-base" htmlFor={category}>
+					{category}
+				</label>
+			</div>
+		));
+	};
+
 	return (
-		<Disclosure>
-			{({ open }) => (
-				<>
-					<Disclosure.Button className="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-						<span>Categories</span>
-						<BsChevronUp
-							className={`${
-								open ? "rotate-180 transform" : ""
-							} h-5 w-5 text-blue-500`}
-						/>
-					</Disclosure.Button>
-					<Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-						{categories.map((category) => (
-							<div className="my-5" key={category}>
-								<input
-									name="category"
-									id={category}
-									type="checkbox"
-									checked={handleChecked(category)}
-									onChange={() => handleSelectedCategory(category)}
+		<>
+			<div className="lg:hidden lg:my-10">
+				<Disclosure>
+					{({ open }) => (
+						<>
+							<Disclosure.Button className="flex w-full justify-between rounded-lg bg-blue-100 px-4 py-2 my-5 text-left text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
+								<h2 className="text-lg">Categories</h2>
+								<BsChevronUp
+									className={`${
+										open ? "rotate-180 transform" : ""
+									} h-5 w-5 text-blue-500`}
 								/>
-								<label className="ms-2 mb-2 text-sm sm:text-lg" htmlFor={category}>
-									{category}
-								</label>
-							</div>
-						))}
-					</Disclosure.Panel>
-				</>
-			)}
-		</Disclosure>
+							</Disclosure.Button>
+							<Disclosure.Panel className="p-2 text-sm">
+								<div>{categoriesFilterOptions()}</div>
+							</Disclosure.Panel>
+						</>
+					)}
+				</Disclosure>
+			</div>
+			<div className="hidden lg:block my-[7vh]">
+				<h2 className="text-xl font-bold text-blue-500">Categories</h2>
+				{categoriesFilterOptions()}
+			</div>
+		</>
 	);
 };
 

@@ -6,7 +6,7 @@ import Rating from "./Rating";
 const ProductItem = ({ product }) => {
 	return (
 		<div className="flex flex-col text-center items-center m-2 w-[50vw] sm:w-[30vw] md:w-[20vw]">
-			<div className="h-[50vh] sm:h-[40vh] lg:h-[50vh] xl:h-[70vh] w-[50vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw]">
+			<div className="h-[50vh] sm:h-[40vh] xl:h-[45vh] w-[50vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw]">
 				<Link href={`/product/${product.id}`}>
 					<div className="relative h-full w-full">
 						<Image
