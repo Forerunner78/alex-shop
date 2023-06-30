@@ -96,7 +96,7 @@ const SearchScreen = (props) => {
 			<div className="mt-[10vh] lg:mt-[20vh] w-[80vw] lg:w-[95vw] lg:flex lg:flex-row">
 				<div className="lg:flex-auto">
 					<div className="hidden lg:block lg:w-[20vw]">
-						<Layout className="lg:rounded-2xl p-5">
+						<Layout className="p-5">
 							<h1 className="text-2xl text-center font-bold mb-10">Filter options</h1>
 							<CategoryRefinements
 								categories={allCategories}
