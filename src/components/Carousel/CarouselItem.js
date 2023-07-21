@@ -30,13 +30,25 @@ const Carousel = ({ products }) => {
 			>
 				<div className="flex flex-row w-[300vw]">
 					<div className="relative w-[100vw] xl:hidden">
-						<CarouselCard image={image1rZ} text="Discover the newest products" />
+						<CarouselCard
+							image={image1rZ}
+							text="Discover the newest products"
+							query="New"
+						/>
 					</div>
 					<div className="relative w-[100vw] hidden xl:inline-block">
-						<CarouselCard image={image1} text="Discover the newest products" />
+						<CarouselCard
+							image={image1}
+							text="Discover the newest products"
+							query="New"
+						/>
 					</div>
 					<div className="relative w-[100vw]">
-						<CarouselCard image={image2} text="Discover the best sales" />
+						<CarouselCard
+							image={image2}
+							text="Discover the best sales"
+							query="BestSales"
+						/>
 					</div>
 					<div className="relative w-[100vw]">
 						<CarouselCard image={image3} text="Uncover the latest trends" query="All" />

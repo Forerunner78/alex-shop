@@ -7,6 +7,7 @@ const CategoryRefinements = ({ categories, handleSelectedCategories }) => {
 	const router = useRouter();
 	const routerCategory = router.query.category;
 	const [selectedCategories, setSelectedCategories] = useState([routerCategory]);
+	const specialCategories = ["New", "BestSales"];
 
 	const handleChecked = (category) => {
 		return selectedCategories.includes(category);
@@ -49,6 +50,30 @@ const CategoryRefinements = ({ categories, handleSelectedCategories }) => {
 		));
 	};
 
+	const specialCategoriesFilterOptions = () => {
+		return specialCategories.map((category) => (
+			<div className="my-8" key={category}>
+				<input
+					name="category"
+					id={category}
+					type="checkbox"
+					checked={handleChecked(category)}
+					onChange={() => handleSelectedCategory(category)}
+				/>
+				<label
+					className="ms-2 mb-2 text-sm sm:text-lg lg:text-base font-bold text-blue-500 uppercase underline underline-offset-4"
+					htmlFor={category}
+				>
+					{category === "BestSales"
+						? "Best Sales"
+						: category === "New"
+						? "New Products"
+						: category}
+				</label>
+			</div>
+		));
+	};
+
 	return (
 		<>
 			<div className="lg:hidden lg:my-10">
@@ -72,6 +97,7 @@ const CategoryRefinements = ({ categories, handleSelectedCategories }) => {
 			</div>
 			<div className="hidden lg:block my-[7vh]">
 				<h2 className="text-xl font-bold text-blue-500">Categories</h2>
+				{specialCategoriesFilterOptions()}
 				{categoriesFilterOptions()}
 			</div>
 		</>
