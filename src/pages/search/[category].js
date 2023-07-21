@@ -32,20 +32,52 @@ const SearchScreen = (props) => {
 		setSelectedCategories(e);
 	};
 
+	const priceRange = (product) => {
+		return product.price >= selectedPriceRange[0] && product.price <= selectedPriceRange[1];
+	};
+
 	const filteredProducts = (products) => {
 		setIsLoading(true);
 		let filtered = products;
+		const isNewSelected = selectedCategories.includes("New");
+		const isBestSalesSelected = selectedCategories.includes("BestSales");
+		const isAllSpecialCategoriesSelected = isNewSelected && isBestSalesSelected;
+
 		if (selectedCategories.includes("All")) {
-			filtered = filtered.filter(
-				(product) =>
-					product.price >= selectedPriceRange[0] && product.price <= selectedPriceRange[1]
-			);
+			filtered = filtered.filter((product) => priceRange(product));
+		} else if (isAllSpecialCategoriesSelected) {
+			filtered = filtered.filter((product) => {
+				const productCategories = new Set(product.category);
+				return (
+					product.category.includes("New") &&
+					product.category.includes("BestSales") &&
+					selectedCategories.every((category) => productCategories.has(category)) &&
+					priceRange(product)
+				);
+			});
+		} else if (isNewSelected || isBestSalesSelected) {
+			filtered = filtered.filter((product) => {
+				if (isNewSelected) {
+					const productCategories = new Set(product.category);
+					return (
+						product.category.includes("New") &&
+						selectedCategories.every((category) => productCategories.has(category)) &&
+						priceRange(product)
+					);
+				} else if (isBestSalesSelected) {
+					const productCategories = new Set(product.category);
+					return (
+						product.category.includes("BestSales") &&
+						selectedCategories.every((category) => productCategories.has(category)) &&
+						priceRange(product)
+					);
+				}
+			});
 		} else {
 			filtered = filtered.filter(
 				(product) =>
-					selectedCategories.includes(product.category) &&
-					product.price >= selectedPriceRange[0] &&
-					product.price <= selectedPriceRange[1]
+					product.category.some((category) => selectedCategories.includes(category)) &&
+					priceRange(product)
 			);
 		}
 		switch (selectedSortOption.id) {
@@ -215,10 +247,14 @@ export async function getServerSideProps() {
 
 	const getAllCategories = () => {
 		const allCategories = ["All"];
+		const specialCategories = ["New", "BestSales"];
 		allProducts.forEach((product) => {
-			if (!allCategories.includes(product.category)) {
-				allCategories.push(product.category);
-			}
+			const productCategoryArray = product.category;
+			productCategoryArray.forEach((category) => {
+				if (!allCategories.includes(category) && !specialCategories.includes(category)) {
+					allCategories.push(category);
+				}
+			});
 		});
 		return allCategories;
 	};
